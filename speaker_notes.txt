@@ -1,93 +1,102 @@
 ========================================================
 AI-DRIVEN EMBEDDED PRODUCT LIFECYCLE ORCHESTRATOR V3
-Speaker Notes — 4-Minute Presentation
-~24 seconds per slide
+Speaker Notes - 4-Minute Presentation
+~22 seconds per slide
 ========================================================
 
-──────────────────────────────────────────────────────
-SLIDE 1 — COVER  (~20 sec)
-──────────────────────────────────────────────────────
-"Today I'm presenting AEPLO V3 — an AI platform that
-orchestrates the entire embedded product lifecycle.
-The promise: ship faster, with fewer defects, and
-stay audit-ready from day one."
+--------------------------------------------------------
+SLIDE 1 - COVER  (~18 sec)
+--------------------------------------------------------
+"Today I'm presenting AEPLO V3 - an AI platform that
+orchestrates the embedded product lifecycle from concept
+through release and field learning. The promise is simple:
+ship faster, debug faster, and stay audit-ready from day one."
 
-──────────────────────────────────────────────────────
-SLIDE 2 — THE PROBLEM  (~25 sec)
-──────────────────────────────────────────────────────
-"Embedded development is broken. Teams juggle 12-plus
-siloed tools, bugs are found too late, and compliance
-artefacts are generated manually.
-72% of embedded projects miss their release date.
-We fix that."
+--------------------------------------------------------
+SLIDE 2 - THE PROBLEM  (~22 sec)
+--------------------------------------------------------
+"Embedded development is fragmented. Requirements, code,
+hardware debug, QA and governance live in separate tools.
+Sheraaz's addition highlights a painful example: MCU bugs
+still require manual JTAG setup, register decoding, memory
+inspection and ticket updates. That slows releases."
 
-──────────────────────────────────────────────────────
-SLIDE 3 — SOLUTION  (~25 sec)
-──────────────────────────────────────────────────────
-"AEPLO V3 is a lifecycle-aware AI orchestrator built
-on four pillars: multi-agent intelligence, continuous
-QA feedback, and governance baked in at every stage —
-not bolted on at the end."
+--------------------------------------------------------
+SLIDE 3 - SOLUTION  (~22 sec)
+--------------------------------------------------------
+"AEPLO V3 is a lifecycle-aware AI orchestrator. It combines
+multi-agent engineering intelligence, continuous QA feedback,
+governance built in, and now an agentic JTAG debug workflow
+that turns hardware evidence into traceable fixes."
 
-──────────────────────────────────────────────────────
-SLIDE 4 — ARCHITECTURE  (~25 sec)
-──────────────────────────────────────────────────────
-"The platform has five layers: data ingestion,
-a semantic knowledge graph, the AI orchestration
-core, automation hooks, and delivery outputs.
-Everything — requirements, code, QA, compliance —
-flows through one unified pipeline."
+--------------------------------------------------------
+SLIDE 4 - ARCHITECTURE  (~24 sec)
+--------------------------------------------------------
+"The architecture connects requirements, source code, Jira
+tickets, JTAG and SWD evidence, QA results and governance
+rules. The EOPS Copilot core routes work to specialized agents,
+including the JTAG Orchestrator and Fault Analyzer, then feeds
+controlled fixes into PRs, release gates and audit outputs."
 
-──────────────────────────────────────────────────────
-SLIDE 5 — CHANGE IMPACT ANALYSIS  (~25 sec)
-──────────────────────────────────────────────────────
-"When a developer commits a change, AEPLO detects
-RTOS and config deltas, analyzes timing and scheduling
-impacts, and flags system-level risks in under 30
-seconds — before integration, not after."
+--------------------------------------------------------
+SLIDE 5 - CHANGE IMPACT ANALYSIS  (~22 sec)
+--------------------------------------------------------
+"When a developer commits a change, AEPLO detects RTOS and
+configuration deltas, analyzes timing and scheduling impacts,
+and flags system-level risks before integration. The same
+knowledge graph becomes the context for debugging real MCU
+faults."
 
-──────────────────────────────────────────────────────
-SLIDE 6 — FIRMWARE RELEASE GATEKEEPER  (~25 sec)
-──────────────────────────────────────────────────────
-"The Release Gatekeeper gives one unambiguous verdict:
-READY or NOT READY — with a prioritized fix list.
-No more subjective go/no-go meetings.
-Releases become predictable commitments."
+--------------------------------------------------------
+SLIDE 6 - JTAG DEBUG COPILOT  (~28 sec)
+--------------------------------------------------------
+"This is Sheraaz's BuildAThon idea merged into the scheme.
+A Jira bug starts the flow. The JTAG Orchestrator attaches to
+the IDE, J-Link probe and target MCU, then routes work to a
+Fault Analyzer, Variable Tracer, Peripheral Inspector, Memory
+Parser and Probing Agent. The output is a controlled auto-fix:
+root cause, register evidence, patch, PR and ticket update."
 
-──────────────────────────────────────────────────────
-SLIDE 7 — QA2RELEASE INTELLIGENCE  (~25 sec)
-──────────────────────────────────────────────────────
-"QA2Release closes the loop. Failures are analyzed,
-root causes extracted, and improvement tickets
-auto-generated for the next release.
-Defects don't repeat. Every release is better
-than the last."
+--------------------------------------------------------
+SLIDE 7 - FIRMWARE RELEASE GATEKEEPER  (~22 sec)
+--------------------------------------------------------
+"The Release Gatekeeper gives one unambiguous verdict: READY
+or NOT READY. For JTAG-derived fixes, it evaluates the code
+change plus captured hardware evidence, coverage, traceability
+and compliance checks, then returns clear remediation actions."
 
-──────────────────────────────────────────────────────
-SLIDE 8 — DEMO FLOW  (~20 sec)
-──────────────────────────────────────────────────────
-"The live pipeline runs in three stages: change
-triggers impact analysis, impact feeds the release
-gate, and QA results drive the next cycle.
-Fully automated, end to end."
+--------------------------------------------------------
+SLIDE 8 - QA2RELEASE INTELLIGENCE  (~22 sec)
+--------------------------------------------------------
+"QA2Release closes the loop. Failures are analyzed, root causes
+are extracted, and improvement tickets are generated for the
+next release. JTAG evidence now becomes part of that learning
+loop, so the same class of fault is less likely to repeat."
 
-──────────────────────────────────────────────────────
-SLIDE 9 — BUSINESS OUTCOMES  (~20 sec)
-──────────────────────────────────────────────────────
-"The numbers: 60% fewer post-release defects,
-95% on-time delivery, 100% traceability coverage,
-and 40% faster time-to-market.
-Payback in under four months."
+--------------------------------------------------------
+SLIDE 9 - DEMO FLOW  (~22 sec)
+--------------------------------------------------------
+"The live demo runs in three stages. First, a Jira firmware bug
+opens a JTAG diagnosis session. Second, the controlled fix and
+hardware evidence feed the Release Gate. Third, QA results drive
+the next release plan. The flow is automated end to end."
 
-──────────────────────────────────────────────────────
-SLIDE 10 — CONCLUSION  (~20 sec)
-──────────────────────────────────────────────────────
-"We transform fragmented workflows into a continuous,
-AI-driven lifecycle. We don't just detect issues —
-we prevent them.
-Visit aeplo.ai/demo or email hello@aeplo.ai
-to start your pilot. Thank you."
+--------------------------------------------------------
+SLIDE 10 - BUSINESS OUTCOMES  (~20 sec)
+--------------------------------------------------------
+"The outcomes now cover both lifecycle orchestration and debug
+acceleration: fewer post-release defects, ticket-to-root-cause
+in under 30 minutes for MCU faults, complete traceability, and
+40% faster time-to-market."
+
+--------------------------------------------------------
+SLIDE 11 - CONCLUSION  (~18 sec)
+--------------------------------------------------------
+"AEPLO V3 transforms fragmented workflows into a continuous,
+AI-driven lifecycle. With Sheraaz's JTAG copilot included, we
+do not just detect issues - we diagnose, fix, verify and learn
+from them. Thank you."
 
 ========================================================
-TOTAL: ~4 minutes  |  10 slides  |  ~24 sec/slide
+TOTAL: ~4 minutes  |  11 slides  |  ~22 sec/slide
 ========================================================

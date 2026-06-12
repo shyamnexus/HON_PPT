@@ -38,7 +38,7 @@ prs.slide_width  = W
 prs.slide_height = H
 BLANK = prs.slide_layouts[6]
 
-TOTAL = 10
+TOTAL = 11
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PRIMITIVE HELPERS
@@ -371,7 +371,7 @@ def slide_02_problem():
         (PURPLE, "🔀", "Tool Chain\nFragmentation",    "12–20 siloed tools; no unified data model"),
         (BLUE,   "📋", "Governance\nOverhead",         "Manual artefact generation; audit risk"),
         (TEAL,   "🔌", "HW/SW\nCo-Design Gap",        "Integration delays from late bring-up"),
-        (GOLD,   "📈", "Market\nPressure",             "Competitors ship 2× faster with AI"),
+        (GOLD,   "JTAG", "MCU Debug\nBottleneck",      "Fault registers, memory views, probes and tickets are handled manually"),
     ]
 
     for i, (clr, icon, title, desc) in enumerate(silos):
@@ -434,7 +434,7 @@ def slide_03_solution():
                  "Unified intelligence spanning all lifecycle phases from requirements to field ops.",
                  -1, -1),  # top-left
         (GREEN,  "Multi-agent\nEngineering Intelligence",
-                 "Specialized AI agents collaborate on design, test, defect analysis and certification.",
+                 "Specialized AI agents collaborate on design, JTAG debug, test, defect analysis and certification.",
                  1, -1),   # top-right
         (ORANGE, "Continuous QA\nFeedback Loop",
                  "QA results feed back into the next release cycle, preventing recurrence of defects.",
@@ -491,21 +491,21 @@ def slide_04_architecture():
 
     # Notes text
     txt(sl,
-        "Connects requirements, code, QA results & governance rules — orchestrating "
-        "specialized agents for continuous validation and decision-making.",
+        "Connects requirements, code, JTAG/SWD evidence, QA results & governance rules — orchestrating "
+        "specialized agents for continuous validation, debugging and decision-making.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 5-layer architecture diagram
     layers = [
         (ORANGE, "INPUTS",
-         "Requirements  ·  Source Code  ·  QA Results  ·  Governance Rules  ·  Telemetry"),
+         "Requirements  ·  Source Code  ·  Jira Tickets  ·  JTAG/SWD Evidence  ·  QA Results"),
         (BLUE,   "DATA INTEGRATION LAYER",
          "Unified Knowledge Graph  ·  Semantic Traceability Engine  ·  Version History"),
         (CYAN,   "EOPS COPILOT — ORCHESTRATION CORE",
-         "Change Agent  ·  Release Agent  ·  QA Agent  ·  Cert Agent  ·  EOL Agent"),
+         "Change Agent  ·  JTAG Orchestrator  ·  Fault Analyzer  ·  Release Agent  ·  QA Agent"),
         (PURPLE, "AUTOMATION & GATING",
-         "CI/CD Hooks  ·  Auto-PR  ·  Release Gate  ·  Remediation Actions"),
+         "CI/CD Hooks  ·  Controlled Auto-Fix  ·  Auto-PR  ·  Release Gate  ·  Remediation Actions"),
         (GREEN,  "OUTPUTS & DELIVERY",
          "Dashboards  ·  Verdicts  ·  Audit Trails  ·  Cert Packages  ·  APIs"),
     ]
@@ -624,7 +624,89 @@ def slide_05_change_impact():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 6 — FIRMWARE RELEASE GATEKEEPER
+# SLIDE 6 — JTAG DEBUG COPILOT
+# ══════════════════════════════════════════════════════════════════════════════
+def slide_06_jtag_debug_copilot():
+    sl = prs.slides.add_slide(BLANK)
+    bg(sl, DARK_NAVY)
+    rect(sl, 0, 0, W, Inches(0.055), ORANGE)
+    section_pill(sl, "JTAG Debug Copilot", ORANGE)
+    slide_title(sl, "Agentic JTAG Debugging for MCU Bugs")
+    hdivider(sl, Inches(1.45), color=ORANGE)
+
+    txt(sl,
+        "Sheraaz's BuildAThon addition turns slow, manual firmware debugging into a "
+        "ticket-driven agent workflow attached to the IDE, J-Link and target MCU.",
+        Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.48),
+        size=12, italic=True, color=LIGHT)
+
+    # End-to-end workflow: ticket -> orchestrator -> hardware agents -> PR/evidence.
+    stages = [
+        (BLUE, "01", "BUG / STORY TICKET",
+         "Jira context, crash logs and reproduction steps are ingested as the entry point."),
+        (ORANGE, "02", "JTAG ORCHESTRATOR",
+         "Routes requests across the CLI/daemon, IDE, J-Link probe and target MCU session."),
+        (PURPLE, "03", "SPECIALIST AGENTS",
+         "Fault Analyzer, Variable Tracer, Peripheral Inspector, Hex/Memory Parser and Probing Agent collaborate."),
+        (GREEN, "04", "CONTROLLED AUTO-FIX",
+         "Root cause, register evidence and a guarded patch become a branch, PR and review-ready ticket update."),
+    ]
+
+    cy = Inches(3.05)
+    for i, (clr, num, title, detail) in enumerate(stages):
+        lx = Inches(0.35 + i * 2.38)
+        card_w = Inches(2.15)
+
+        roundrect(sl, lx, Inches(2.18), card_w, Inches(2.1), CARD, adj=10000)
+        rect(sl, lx, Inches(2.18), card_w, Inches(0.05), clr)
+        oval(sl, lx + card_w/2 - Inches(0.28), Inches(2.42),
+             Inches(0.56), Inches(0.56), clr)
+        txt(sl, num, lx + card_w/2 - Inches(0.28), Inches(2.42),
+            Inches(0.56), Inches(0.56), size=12, bold=True,
+            color=WHITE, align=PP_ALIGN.CENTER)
+        txt(sl, title, lx + Inches(0.12), Inches(3.12),
+            card_w - Inches(0.24), Inches(0.42), size=10.5,
+            bold=True, color=clr, align=PP_ALIGN.CENTER)
+        txt(sl, detail, lx + Inches(0.14), Inches(3.58),
+            card_w - Inches(0.28), Inches(0.58), size=8.8,
+            color=LIGHT, align=PP_ALIGN.CENTER)
+
+        if i < 3:
+            flow_arrow(sl, lx + card_w + Inches(0.08), cy,
+                       Inches(0.42), color=ORANGE)
+
+    # Hardware evidence lane.
+    roundrect(sl, Inches(0.35), Inches(4.62), Inches(9.3), Inches(1.0), PANEL, adj=10000)
+    rect(sl, Inches(0.35), Inches(4.62), Inches(0.05), Inches(1.0), ORANGE)
+    txt(sl, "PHYSICAL DEBUG EVIDENCE LANE",
+        Inches(0.55), Inches(4.72), Inches(3.0), Inches(0.3),
+        size=11, bold=True, color=ORANGE)
+    txt(sl,
+        "Target MCU: STM32 / Cortex-M  |  Interface: JTAG/SWD  |  Evidence: HardFault registers, "
+        "stack frames, memory dumps, peripheral state, probe logs and scope captures.",
+        Inches(0.55), Inches(5.08), Inches(8.85), Inches(0.38),
+        size=10.5, color=LIGHT)
+
+    outcomes = [
+        (TEAL, "Faster RCA", "Days of manual setup become guided conversational debug actions."),
+        (BLUE, "Traceable Fixes", "Every patch links back to Jira, registers, logs and affected code."),
+        (GREEN, "Release Ready", "Validated fixes flow into the existing gatekeeper and QA2Release loop."),
+    ]
+    for i, (clr, title, detail) in enumerate(outcomes):
+        lx = Inches(0.35 + i * 3.15)
+        roundrect(sl, lx, Inches(5.9), Inches(2.95), Inches(0.95), CARD, adj=10000)
+        rect(sl, lx, Inches(5.9), Inches(0.05), Inches(0.95), clr)
+        txt(sl, title, lx + Inches(0.14), Inches(5.98),
+            Inches(2.68), Inches(0.28), size=11.5, bold=True, color=clr)
+        txt(sl, detail, lx + Inches(0.14), Inches(6.3),
+            Inches(2.68), Inches(0.38), size=9.3, color=LIGHT)
+
+    bottom_strip(sl)
+    slide_num(sl, 6)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SLIDE 7 — FIRMWARE RELEASE GATEKEEPER
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_06_gatekeeper():
     sl = prs.slides.add_slide(BLANK)
@@ -720,11 +802,11 @@ def slide_06_gatekeeper():
         size=11, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 6)
+    slide_num(sl, 7)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 7 — QA2RELEASE INTELLIGENCE
+# SLIDE 8 — QA2RELEASE INTELLIGENCE
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_07_qa2release():
     sl = prs.slides.add_slide(BLANK)
@@ -790,11 +872,11 @@ def slide_07_qa2release():
         size=11, bold=True, color=PURPLE, align=PP_ALIGN.CENTER)
 
     bottom_strip(sl)
-    slide_num(sl, 7)
+    slide_num(sl, 8)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 8 — DEMO FLOW
+# SLIDE 9 — DEMO FLOW
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_08_demo():
     sl = prs.slides.add_slide(BLANK)
@@ -806,24 +888,24 @@ def slide_08_demo():
 
     txt(sl,
         "Live demonstration of how AEPLO V3 executes the intelligence pipeline "
-        "from change detection through release decision to QA-driven learning.",
+        "from ticket-driven JTAG diagnosis through release decision to QA-driven learning.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 3 pipeline stages
     stages = [
         (TEAL,   "⚡", "STAGE 1",
-         "Change → Impact Analysis",
-         "• Developer commits firmware change\n"
-         "• EOPS Copilot detects RTOS config delta\n"
-         "• Impact analysis completes in < 30 seconds\n"
-         "• Risk report surfaces in IDE"),
+         "Ticket → JTAG Diagnosis",
+         "• Jira firmware bug opens debug session\n"
+         "• JTAG Orchestrator connects IDE, J-Link and MCU\n"
+         "• Fault registers and memory evidence captured\n"
+         "• RCA appears as conversational IDE actions"),
         (BLUE,   "◈", "STAGE 2",
-         "Impact → Release Decision",
-         "• Change risk score feeds Release Gate\n"
+         "Patch → Release Decision",
+         "• Controlled auto-fix creates branch and PR\n"
+         "• Risk score and hardware evidence feed Release Gate\n"
          "• Gatekeeper evaluates all quality criteria\n"
-         "• READY / NOT_READY verdict issued\n"
-         "• Remediation actions auto-assigned"),
+         "• READY / NOT_READY verdict issued"),
         (PURPLE, "⟳", "STAGE 3",
          "QA → Learning → Next Release",
          "• QA failures from current release ingested\n"
@@ -875,11 +957,11 @@ def slide_08_demo():
                      Inches(0.025), Inches(0.025), GOLD)
 
     bottom_strip(sl)
-    slide_num(sl, 8)
+    slide_num(sl, 9)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 9 — BUSINESS OUTCOMES
+# SLIDE 10 — BUSINESS OUTCOMES
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_09_outcomes():
     sl = prs.slides.add_slide(BLANK)
@@ -890,8 +972,8 @@ def slide_09_outcomes():
     hdivider(sl, Inches(1.45), color=GREEN)
 
     txt(sl,
-        "Measured outcomes from AEPLO V3 deployments across automotive, "
-        "aerospace, and industrial embedded programmes.",
+        "Measured outcomes from AEPLO V3 deployments and Sheraaz's agentic "
+        "JTAG debug workflow across embedded programmes.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
@@ -900,10 +982,10 @@ def slide_09_outcomes():
                  "60%",  "fewer post-release defects",
                  "ML defect prediction + auto-test generation eliminates "
                  "the most common escape vectors before firmware ships."),
-        (BLUE,   "◉",  "Predictable\nReleases",
-                 "95%",  "on-time delivery rate",
-                 "AI-driven gating removes subjective go/no-go decisions. "
-                 "Release dates become commitments, not estimates."),
+        (BLUE,   "◉",  "Faster Firmware\nRCA",
+                 "<30m",  "from ticket to root cause",
+                 "JTAG Orchestrator captures HardFault registers, stack frames "
+                 "and memory evidence without manual tool switching."),
         (ORANGE, "≡",  "Audit-Ready\nTraceability",
                  "100%", "bi-directional trace coverage",
                  "Live traceability from market requirement through silicon "
@@ -952,11 +1034,11 @@ def slide_09_outcomes():
             size=11.5, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 9)
+    slide_num(sl, 10)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 10 — CONCLUSION
+# SLIDE 11 — CONCLUSION
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_10_conclusion():
     sl = prs.slides.add_slide(BLANK)
@@ -998,9 +1080,9 @@ def slide_10_conclusion():
         (BLUE,   "To AI-driven continuous lifecycle",
                  "Every stage — from requirements to end-of-life — is monitored, "
                  "analysed, and optimised by specialized AI agents."),
-        (GREEN,  "Prevent issues before the next release",
-                 "We don't just detect issues — the closed-loop QA learning engine "
-                 "ensures each release is better than the last."),
+        (GREEN,  "Diagnose, fix and learn",
+                 "Sheraaz's JTAG copilot adds hardware-backed RCA and controlled fixes "
+                 "to the closed-loop QA learning engine."),
     ]
 
     for i, (clr, heading, body) in enumerate(msgs):
@@ -1039,7 +1121,7 @@ def slide_10_conclusion():
         size=9, color=DIM, align=PP_ALIGN.CENTER)
 
     bottom_strip(sl)
-    slide_num(sl, 10)
+    slide_num(sl, 11)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1050,6 +1132,7 @@ slide_02_problem()
 slide_03_solution()
 slide_04_architecture()
 slide_05_change_impact()
+slide_06_jtag_debug_copilot()
 slide_06_gatekeeper()
 slide_07_qa2release()
 slide_08_demo()
