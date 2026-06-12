@@ -38,7 +38,7 @@ prs.slide_width  = W
 prs.slide_height = H
 BLANK = prs.slide_layouts[6]
 
-TOTAL = 11
+TOTAL = 12
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PRIMITIVE HELPERS
@@ -305,13 +305,13 @@ def slide_01_cover():
              color=RGBColor(0x00, 0x50, 0x88))
 
     # Title text
-    txt(sl, "AI-DRIVEN EMBEDDED",
+    txt(sl, "AEPLO JTAG",
         Inches(0.28), Inches(1.15), Inches(6.0), Inches(0.82),
         size=38, bold=True, color=WHITE)
-    txt(sl, "PRODUCT LIFECYCLE",
+    txt(sl, "ACCELERATOR FOR",
         Inches(0.28), Inches(1.92), Inches(6.0), Inches(0.82),
         size=38, bold=True, color=WHITE)
-    txt(sl, "ORCHESTRATOR",
+    txt(sl, "EMBEDDED PDLC",
         Inches(0.28), Inches(2.68), Inches(6.0), Inches(0.82),
         size=38, bold=True, color=CYAN)
 
@@ -323,9 +323,9 @@ def slide_01_cover():
 
     # Tagline
     rect(sl, Inches(0.28), Inches(4.15), Inches(0.055), Inches(0.9), CYAN)
-    txt(sl, "End-to-End Embedded Intelligence\nFaster  |  Safer  |  Predictable",
+    txt(sl, "Embedded  |  PDLC  |  AI Optimisation\nPG1 Discovery  ->  PG3 Development  ->  PG5 Launch Prep",
         Inches(0.46), Inches(4.18), Inches(5.4), Inches(0.85),
-        size=16, italic=True, color=LIGHT)
+        size=14.5, italic=True, color=LIGHT)
 
     # Bottom date/confidential
     txt(sl, "May 2026   |   CONFIDENTIAL",
@@ -352,26 +352,26 @@ def slide_02_problem():
     rect(sl, 0, 0, W, Inches(0.055), ORANGE)
     txt(sl, "THE PROBLEM", Inches(0.38), Inches(0.15), Inches(9.0), Inches(0.38),
         size=10, bold=True, color=ORANGE)
-    txt(sl, "Embedded Development Is Fragmented",
+    txt(sl, "Embedded PDLC Data Is Fragmented",
         Inches(0.38), Inches(0.5), Inches(9.3), Inches(0.75),
         size=30, bold=True, color=WHITE)
     hdivider(sl, Inches(1.38), color=ORANGE)
 
     # Subtitle note
     txt(sl,
-        "Lifecycle stages operate in silos — leading to late defect discovery, "
-        "manual governance overhead, and limited reuse of QA insights.",
+        "NPI gates rely on disconnected requirements, Jira tickets, Confluence knowledge, GitHub code, "
+        "JTAG/SWD evidence and QA results — slowing decisions from PG1 to PG5.",
         Inches(0.38), Inches(1.52), Inches(9.3), Inches(0.55),
         size=13, italic=True, color=LIGHT)
 
     # 6 silo cards
     silos = [
-        (ORANGE, "⚡", "Requirements\n& Planning",     "Manual, disconnected from code reality"),
-        (RED,    "🐛", "Late Defect\nDiscovery",       "Bugs found at integration — 100× costlier"),
-        (PURPLE, "🔀", "Tool Chain\nFragmentation",    "12–20 siloed tools; no unified data model"),
-        (BLUE,   "📋", "Governance\nOverhead",         "Manual artefact generation; audit risk"),
-        (TEAL,   "🔌", "HW/SW\nCo-Design Gap",        "Integration delays from late bring-up"),
-        (GOLD,   "JTAG", "MCU Debug\nBottleneck",      "Fault registers, memory views, probes and tickets are handled manually"),
+        (ORANGE, "PG1",  "Discovery\nBlind Spots",     "Risks and debug hotspots are not visible early"),
+        (RED,    "🐛",   "Late Defect\nDiscovery",     "MCU faults surface after coding and integration"),
+        (PURPLE, "🔀",   "Tool Chain\nFragmentation",  "ROVO, Copilot, Jira, GitHub and JTAG need orchestration"),
+        (BLUE,   "📋",   "PDLC\nTrace Gaps",           "Requirements, code, tests and evidence drift apart"),
+        (TEAL,   "🔌",   "Embedded\nHardware Gap",     "JTAG/SWD evidence stays outside lifecycle decisions"),
+        (GOLD,   "PG5",  "Launch Gate\nUncertainty",  "Readiness depends on manual proof and subjective reviews"),
     ]
 
     for i, (clr, icon, title, desc) in enumerate(silos):
@@ -409,7 +409,7 @@ def slide_03_solution():
     bg(sl, DARK_NAVY)
     rect(sl, 0, 0, W, Inches(0.055), CYAN)
     section_pill(sl, "Solution", CYAN)
-    slide_title(sl, "Lifecycle-Aware AI Orchestrator")
+    slide_title(sl, "AEPLO Platform for Embedded PDLC AI Optimisation")
     hdivider(sl, Inches(1.45), color=CYAN)
 
     # Central hub
@@ -425,22 +425,22 @@ def slide_03_solution():
                  cy + rr * math.sin(angle) - Inches(0.022),
                  Inches(0.044), Inches(0.044), CYAN)
 
-    txt(sl, "AEPLO\nV3", cx - hub_r, cy - hub_r, hub_r*2, hub_r*2,
+    txt(sl, "AEPLO\nJTAG", cx - hub_r, cy - hub_r, hub_r*2, hub_r*2,
         size=14, bold=True, color=CYAN, align=PP_ALIGN.CENTER)
 
     # 4 pillars arranged around the hub
     pillars = [
-        (CYAN,   "Lifecycle-aware\nAI Orchestrator",
-                 "Unified intelligence spanning all lifecycle phases from requirements to field ops.",
+        (CYAN,   "Connected Embedded\nData Foundation",
+                 "Unifies Jira, Confluence, GitHub, JTAG/SWD evidence, QA and gate context.",
                  -1, -1),  # top-left
-        (GREEN,  "Multi-agent\nEngineering Intelligence",
-                 "Specialized AI agents collaborate on design, JTAG debug, test, defect analysis and certification.",
+        (GREEN,  "JTAG Accelerator\nInside AEPLO",
+                 "Hardware-backed RCA, variable tracing and peripheral inspection become PDLC evidence.",
                  1, -1),   # top-right
-        (ORANGE, "Continuous QA\nFeedback Loop",
-                 "QA results feed back into the next release cycle, preventing recurrence of defects.",
+        (ORANGE, "NPI Gate\nOrchestration",
+                 "PG1 discovery, PG3 development and PG5 launch prep become one demo flow.",
                  -1,  1),  # bottom-left
-        (PURPLE, "Governance\nBuilt-in",
-                 "ISO 26262, IEC 61508, DO-178C compliance woven into every stage automatically.",
+        (PURPLE, "AI Optimisation\nExperiences",
+                 "ROVO Studio, Copilot and agents optimise risks, fixes, tests and readiness.",
                  1,  1),   # bottom-right
     ]
 
@@ -486,28 +486,28 @@ def slide_04_architecture():
     bg(sl, DARK_NAVY)
     rect(sl, 0, 0, W, Inches(0.055), BLUE)
     section_pill(sl, "Architecture", BLUE)
-    slide_title(sl, "EOPS Copilot — System Architecture")
+    slide_title(sl, "AEPLO Platform Architecture")
     hdivider(sl, Inches(1.45), color=BLUE)
 
     # Notes text
     txt(sl,
-        "Connects requirements, code, JTAG/SWD evidence, QA results & governance rules — orchestrating "
-        "specialized agents for continuous validation, debugging and decision-making.",
+        "Connects Jira, Confluence, GitHub, Copilot, ROVO Studio, Atlassian MCP and JTAG/SWD "
+        "evidence into one embedded PDLC optimisation platform.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 5-layer architecture diagram
     layers = [
-        (ORANGE, "INPUTS",
-         "Requirements  ·  Source Code  ·  Jira Tickets  ·  JTAG/SWD Evidence  ·  QA Results"),
+        (ORANGE, "CONNECTED INPUTS",
+         "Jira · Confluence · GitHub · Copilot · ROVO Studio · JTAG/SWD · QA Results"),
         (BLUE,   "DATA INTEGRATION LAYER",
          "Unified Knowledge Graph  ·  Semantic Traceability Engine  ·  Version History"),
-        (CYAN,   "EOPS COPILOT — ORCHESTRATION CORE",
-         "Change Agent  ·  JTAG Orchestrator  ·  Fault Analyzer  ·  Release Agent  ·  QA Agent"),
+        (CYAN,   "AEPLO ORCHESTRATION CORE",
+         "Atlassian MCP · JTAG Accelerator · Fault Analyzer · Release Agent · QA Agent"),
         (PURPLE, "AUTOMATION & GATING",
          "CI/CD Hooks  ·  Controlled Auto-Fix  ·  Auto-PR  ·  Release Gate  ·  Remediation Actions"),
-        (GREEN,  "OUTPUTS & DELIVERY",
-         "Dashboards  ·  Verdicts  ·  Audit Trails  ·  Cert Packages  ·  APIs"),
+        (GREEN,  "NPI GATE OUTCOMES",
+         "PG1 Risk Plan · PG3 RCA + PR · PG5 READY / NOT_READY · Audit Evidence"),
     ]
 
     for i, (clr, lbl, detail) in enumerate(layers):
@@ -536,39 +536,104 @@ def slide_04_architecture():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 5 — CHANGE IMPACT ANALYSIS
+# SLIDE 5 — CONNECTED PLATFORM STACK
+# ══════════════════════════════════════════════════════════════════════════════
+def slide_05_connected_stack():
+    sl = prs.slides.add_slide(BLANK)
+    bg(sl, DARK_NAVY)
+    rect(sl, 0, 0, W, Inches(0.055), GREEN)
+    section_pill(sl, "Connected Platform", GREEN)
+    slide_title(sl, "ROVO + Copilot + Atlassian MCP + GitHub + Jira + Confluence")
+    hdivider(sl, Inches(1.45), color=GREEN)
+
+    txt(sl,
+        "The demo platform brings work management, knowledge, code, AI coding assistance and "
+        "hardware evidence into AEPLO's embedded PDLC optimisation loop.",
+        Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
+        size=12, italic=True, color=LIGHT)
+
+    columns = [
+        (BLUE, "PLAN & KNOWLEDGE", [
+            ("Jira", "NPI epics, coding defects, actions"),
+            ("Confluence", "PRD, architecture, test notes"),
+            ("PG1 Discovery", "Risk map and demo scope"),
+        ]),
+        (PURPLE, "BUILD & CODE", [
+            ("GitHub", "Branches, PRs, reviews, evidence"),
+            ("Copilot", "Patch suggestions and explanations"),
+            ("PG3 Development", "RCA, guarded fix and PR"),
+        ]),
+        (ORANGE, "ORCHESTRATE", [
+            ("Atlassian MCP", "Jira + Confluence actions"),
+            ("AEPLO", "Agent routing and PDLC knowledge graph"),
+            ("ROVO Studio", "NPI demo cockpit and AI experience"),
+        ]),
+        (GREEN, "VALIDATE & LAUNCH", [
+            ("JTAG Accelerator", "MCU register, memory and probe evidence"),
+            ("Release Gate", "READY / NOT_READY with action list"),
+            ("PG5 Launch Prep", "Validation proof and governance pack"),
+        ]),
+    ]
+
+    for i, (clr, title, items) in enumerate(columns):
+        lx = Inches(0.35 + i * 2.35)
+        roundrect(sl, lx, Inches(2.15), Inches(2.12), Inches(4.55), CARD)
+        rect(sl, lx, Inches(2.15), Inches(2.12), Inches(0.06), clr)
+        txt(sl, title, lx + Inches(0.12), Inches(2.32),
+            Inches(1.88), Inches(0.32), size=10.2, bold=True,
+            color=clr, align=PP_ALIGN.CENTER)
+        for j, (label, body) in enumerate(items):
+            ty = Inches(2.95 + j * 1.1)
+            roundrect(sl, lx + Inches(0.15), ty, Inches(1.82), Inches(0.82), PANEL)
+            oval(sl, lx + Inches(0.28), ty + Inches(0.18), Inches(0.28), Inches(0.28), clr)
+            txt(sl, label, lx + Inches(0.65), ty + Inches(0.12),
+                Inches(1.1), Inches(0.18), size=8.8, bold=True, color=WHITE)
+            txt(sl, body, lx + Inches(0.28), ty + Inches(0.42),
+                Inches(1.42), Inches(0.2), size=6.9, color=LIGHT, align=PP_ALIGN.CENTER)
+        if i < len(columns) - 1:
+            arrow_right(sl, lx + Inches(2.18), Inches(4.25), Inches(0.35), CYAN)
+
+    roundrect(sl, Inches(0.35), Inches(6.95), Inches(9.3), Inches(0.34), MID)
+    txt(sl,
+        "COMMON IDEA: AEPLO connects enterprise collaboration tools with embedded hardware evidence to optimise NPI gate decisions.",
+        Inches(0.55), Inches(6.99), Inches(8.9), Inches(0.16),
+        size=8.7, bold=True, color=GREEN, align=PP_ALIGN.CENTER)
+
+    bottom_strip(sl)
+    slide_num(sl, 5)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SLIDE 6 — CHANGE IMPACT ANALYSIS
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_05_change_impact():
     sl = prs.slides.add_slide(BLANK)
     bg(sl, DARK_NAVY)
     rect(sl, 0, 0, W, Inches(0.055), TEAL)
-    section_pill(sl, "Change Impact Analysis", TEAL)
-    slide_title(sl, "Change Impact Analysis")
+    section_pill(sl, "PG1 Discovery", TEAL)
+    slide_title(sl, "PG1 Discovery — AI Risk & Scope Optimisation")
     hdivider(sl, Inches(1.45), color=TEAL)
 
     txt(sl,
-        "Analyzes engineering changes in real time — identifying timing issues, "
-        "config mismatches and system-level risks before integration.",
+        "AEPLO starts before coding: it connects PRD content, Jira themes, Confluence context, "
+        "GitHub history and target-board data to shape a risk-backed embedded demo plan.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 3-step flow (Detect → Analyze → Flag)
     steps = [
-        (TEAL,   "01", "DETECT",
-         "RTOS & Config Changes",
-         "Monitors every commit and configuration change in real time.\n"
-         "Identifies RTOS scheduling changes, BSP config deltas, and "
-         "peripheral register modifications automatically."),
-        (BLUE,   "02", "ANALYZE",
-         "Scheduling & Timing Impacts",
-         "Runs AI-powered impact analysis on detected changes.\n"
-         "Models task preemption effects, IRQ latency shifts, "
-         "stack overflow risk, and inter-process communication impacts."),
-        (ORANGE, "03", "FLAG",
-         "System-Level Risks Early",
-         "Generates prioritized risk reports before integration.\n"
-         "Each flag includes severity, affected components, "
-         "and recommended mitigation — directly in the developer's IDE."),
+        (TEAL,   "01", "COLLECT",
+         "NPI + Embedded Context",
+         "Ingests PRD, Jira epics, Confluence architecture notes, "
+         "GitHub defect history and target-board assumptions."),
+        (BLUE,   "02", "MAP",
+         "PDLC Risk & Traceability",
+         "Builds a lifecycle graph from requirements to code areas, "
+         "tests, JTAG debug hotspots and validation evidence needs."),
+        (ORANGE, "03", "PLAN",
+         "PG1 Demo Readiness",
+         "Produces a risk-backed demo scope, board setup checklist, "
+         "debug scenario and PG3 development entry criteria."),
     ]
 
     # Horizontal flow line
@@ -620,36 +685,36 @@ def slide_05_change_impact():
             size=11.5, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 5)
+    slide_num(sl, 6)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 6 — JTAG DEBUG COPILOT
+# SLIDE 7 — JTAG ACCELERATOR
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_06_jtag_debug_copilot():
     sl = prs.slides.add_slide(BLANK)
     bg(sl, DARK_NAVY)
     rect(sl, 0, 0, W, Inches(0.055), ORANGE)
-    section_pill(sl, "JTAG Debug Copilot", ORANGE)
-    slide_title(sl, "Agentic JTAG Debugging for MCU Bugs")
+    section_pill(sl, "PG3 Development", ORANGE)
+    slide_title(sl, "PG3 Development — AEPLO JTAG Accelerator")
     hdivider(sl, Inches(1.45), color=ORANGE)
 
     txt(sl,
-        "Sheraaz's BuildAThon addition turns slow, manual firmware debugging into a "
-        "ticket-driven agent workflow attached to the IDE, J-Link and target MCU.",
+        "Inside AEPLO, the JTAG Accelerator converts embedded coding defects into "
+        "hardware-backed RCA, controlled code fixes, GitHub PRs and Jira evidence.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.48),
         size=12, italic=True, color=LIGHT)
 
     # End-to-end workflow: ticket -> orchestrator -> hardware agents -> PR/evidence.
     stages = [
-        (BLUE, "01", "BUG / STORY TICKET",
-         "Jira context, crash logs and reproduction steps are ingested as the entry point."),
+        (BLUE, "01", "JIRA / CONFLUENCE CONTEXT",
+         "Bug, requirement, architecture note and PG3 acceptance criteria define the work."),
         (ORANGE, "02", "JTAG ORCHESTRATOR",
-         "Routes requests across the CLI/daemon, IDE, J-Link probe and target MCU session."),
+         "Routes requests across AEPLO, IDE, J-Link probe and target MCU session."),
         (PURPLE, "03", "SPECIALIST AGENTS",
-         "Fault Analyzer, Variable Tracer, Peripheral Inspector, Hex/Memory Parser and Probing Agent collaborate."),
+         "Fault Analyzer, Variable Tracer, Peripheral Inspector and Memory Parser collaborate."),
         (GREEN, "04", "CONTROLLED AUTO-FIX",
-         "Root cause, register evidence and a guarded patch become a branch, PR and review-ready ticket update."),
+         "Copilot-assisted patch becomes a GitHub branch, PR and review-ready Jira update."),
     ]
 
     cy = Inches(3.05)
@@ -683,14 +748,14 @@ def slide_06_jtag_debug_copilot():
         size=11, bold=True, color=ORANGE)
     txt(sl,
         "Target MCU: STM32 / Cortex-M  |  Interface: JTAG/SWD  |  Evidence: HardFault registers, "
-        "stack frames, memory dumps, peripheral state, probe logs and scope captures.",
+        "stack frames, memory dumps, peripheral state, probe logs and GitHub PR links.",
         Inches(0.55), Inches(5.08), Inches(8.85), Inches(0.38),
         size=10.5, color=LIGHT)
 
     outcomes = [
-        (TEAL, "Faster RCA", "Days of manual setup become guided conversational debug actions."),
-        (BLUE, "Traceable Fixes", "Every patch links back to Jira, registers, logs and affected code."),
-        (GREEN, "Release Ready", "Validated fixes flow into the existing gatekeeper and QA2Release loop."),
+        (TEAL, "Faster RCA", "Days of manual setup become guided ROVO/Copilot actions."),
+        (BLUE, "Traceable Fixes", "Every patch links Jira, Confluence, GitHub and hardware evidence."),
+        (GREEN, "PG3 Ready", "Validated fixes flow into PG5 launch preparation gates."),
     ]
     for i, (clr, title, detail) in enumerate(outcomes):
         lx = Inches(0.35 + i * 3.15)
@@ -702,37 +767,37 @@ def slide_06_jtag_debug_copilot():
             Inches(2.68), Inches(0.38), size=9.3, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 6)
+    slide_num(sl, 7)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 7 — FIRMWARE RELEASE GATEKEEPER
+# SLIDE 8 — VALIDATION AND LAUNCH GATEKEEPER
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_06_gatekeeper():
     sl = prs.slides.add_slide(BLANK)
     bg(sl, DARK_NAVY)
     rect(sl, 0, 0, W, Inches(0.055), BLUE)
-    section_pill(sl, "Release Gatekeeper", BLUE)
-    slide_title(sl, "Firmware Release Gatekeeper")
+    section_pill(sl, "PG5 Validation", BLUE)
+    slide_title(sl, "PG5 Validation & Launch Preparation Gatekeeper")
     hdivider(sl, Inches(1.45), color=BLUE)
 
     txt(sl,
-        "Evaluates firmware release readiness using predefined criteria. "
-        "Generates an unambiguous verdict with actionable remediation steps.",
+        "AEPLO evaluates launch readiness using code, QA, traceability and JTAG/SWD evidence. "
+        "The outcome is an unambiguous gate verdict with action-ready remediation.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 3 criteria cards on left
     criteria = [
-        (GREEN,  "✓", "Validates Readiness\nBefore Release",
-                 "All quality gates evaluated: coverage, static analysis, "
-                 "regression status, traceability, and compliance checks."),
+        (GREEN,  "✓", "Validates PG5\nLaunch Readiness",
+                 "Coverage, static analysis, regression status, traceability, "
+                 "hardware proof and launch evidence are checked together."),
         (BLUE,   "◈", "Structured Verdict:\nREADY / NOT_READY",
-                 "Binary, unambiguous gate decision with confidence score "
-                 "and evidence summary — no interpretation needed."),
+                 "Binary, unambiguous gate decision with confidence score, "
+                 "Jira evidence summary and GitHub PR links."),
         (ORANGE, "→", "Clear Remediation\nActions",
                  "Every NOT_READY verdict includes a prioritized action list: "
-                 "which test to fix, which artefact to update, and who owns it."),
+                 "which test, fix, evidence or launch artefact must be updated."),
     ]
 
     for i, (clr, icon, title, desc) in enumerate(criteria):
@@ -802,11 +867,11 @@ def slide_06_gatekeeper():
         size=11, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 7)
+    slide_num(sl, 8)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 8 — QA2RELEASE INTELLIGENCE
+# SLIDE 9 — QA2RELEASE INTELLIGENCE
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_07_qa2release():
     sl = prs.slides.add_slide(BLANK)
@@ -817,25 +882,22 @@ def slide_07_qa2release():
     hdivider(sl, Inches(1.45), color=PURPLE)
 
     txt(sl,
-        "Creates a closed-loop lifecycle: QA results drive root-cause analysis "
-        "and feed improvements directly into the next release — defects are not repeated.",
+        "Creates a closed-loop embedded PDLC: QA results and JTAG evidence drive root-cause "
+        "analysis, test optimisation and next-release learning.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.48),
         size=12, italic=True, color=LIGHT)
 
     # 3 numbered steps — vertical flow on left, detail on right
     steps = [
         (PURPLE, "1", "Analyze QA Failures",
-                 "All QA test failures from the current release are ingested — "
-                 "unit, integration, HIL, and system tests. Failure signatures are "
-                 "clustered by similarity and mapped to change history."),
+                 "All QA failures and hardware evidence are ingested — unit, integration, "
+                 "HIL, system tests, JTAG registers and probe logs are mapped together."),
         (BLUE,   "2", "Extract Root Causes",
-                 "AI correlates failures with recent commits, config changes, and "
-                 "RTOS timing deltas. Each root cause is ranked by confidence and "
-                 "linked to the originating engineering change."),
+                 "AI correlates failures with commits, Jira issues, Confluence decisions, "
+                 "RTOS timing deltas and JTAG/SWD evidence. Root causes are ranked by confidence."),
         (GREEN,  "3", "Generate Next-Release Improvements",
-                 "Automated improvement tickets are raised with code suggestions, "
-                 "test additions, and coverage targets. The next release plan is "
-                 "pre-enriched with lessons from the current cycle."),
+                 "Automated improvement tickets are raised with code suggestions, test additions, "
+                 "coverage targets and launch-prep actions for the next NPI cycle."),
     ]
 
     for i, (clr, num, title, detail) in enumerate(steps):
@@ -872,11 +934,11 @@ def slide_07_qa2release():
         size=11, bold=True, color=PURPLE, align=PP_ALIGN.CENTER)
 
     bottom_strip(sl)
-    slide_num(sl, 8)
+    slide_num(sl, 9)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 9 — DEMO FLOW
+# SLIDE 10 — DEMO FLOW
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_08_demo():
     sl = prs.slides.add_slide(BLANK)
@@ -887,31 +949,31 @@ def slide_08_demo():
     hdivider(sl, Inches(1.45), color=GOLD)
 
     txt(sl,
-        "Live demonstration of how AEPLO V3 executes the intelligence pipeline "
-        "from ticket-driven JTAG diagnosis through release decision to QA-driven learning.",
+        "Live demonstration of how AEPLO executes the NPI gate pipeline from PG1 discovery "
+        "through PG3 JTAG-accelerated development to PG5 validation and launch prep.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
     # 3 pipeline stages
     stages = [
         (TEAL,   "⚡", "STAGE 1",
-         "Ticket → JTAG Diagnosis",
-         "• Jira firmware bug opens debug session\n"
-         "• JTAG Orchestrator connects IDE, J-Link and MCU\n"
-         "• Fault registers and memory evidence captured\n"
-         "• RCA appears as conversational IDE actions"),
+         "PG1 → Discovery",
+         "• ROVO Studio cockpit opens NPI scenario\n"
+         "• Jira + Confluence + GitHub context ingested\n"
+         "• AEPLO maps embedded PDLC risks\n"
+         "• Demo scope and board setup are generated"),
         (BLUE,   "◈", "STAGE 2",
-         "Patch → Release Decision",
-         "• Controlled auto-fix creates branch and PR\n"
-         "• Risk score and hardware evidence feed Release Gate\n"
-         "• Gatekeeper evaluates all quality criteria\n"
-         "• READY / NOT_READY verdict issued"),
+         "PG3 → Development",
+         "• JTAG Accelerator attaches to target MCU\n"
+         "• Fault Analyzer captures register evidence\n"
+         "• Copilot proposes guarded fix\n"
+         "• GitHub PR links code and hardware proof"),
         (PURPLE, "⟳", "STAGE 3",
-         "QA → Learning → Next Release",
-         "• QA failures from current release ingested\n"
-         "• Root causes extracted and ranked\n"
-         "• Improvement tickets auto-generated\n"
-         "• Next release plan pre-enriched"),
+         "PG5 → Validation & Launch Prep",
+         "• QA and JTAG evidence feed Release Gate\n"
+         "• READY / NOT_READY verdict issued\n"
+         "• Jira actions and Confluence summary created\n"
+         "• Next NPI learning loop is updated"),
     ]
 
     for i, (clr, icon, stage_lbl, title, bullets) in enumerate(stages):
@@ -957,11 +1019,11 @@ def slide_08_demo():
                      Inches(0.025), Inches(0.025), GOLD)
 
     bottom_strip(sl)
-    slide_num(sl, 9)
+    slide_num(sl, 10)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 10 — BUSINESS OUTCOMES
+# SLIDE 11 — BUSINESS OUTCOMES
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_09_outcomes():
     sl = prs.slides.add_slide(BLANK)
@@ -972,8 +1034,8 @@ def slide_09_outcomes():
     hdivider(sl, Inches(1.45), color=GREEN)
 
     txt(sl,
-        "Measured outcomes from AEPLO V3 deployments and Sheraaz's agentic "
-        "JTAG debug workflow across embedded programmes.",
+        "Measured outcomes for the Coding Embedded Workstream: connected platform data, "
+        "hardware-backed debugging, AI optimisation and NPI gate confidence.",
         Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45),
         size=12, italic=True, color=LIGHT)
 
@@ -986,14 +1048,14 @@ def slide_09_outcomes():
                  "<30m",  "from ticket to root cause",
                  "JTAG Orchestrator captures HardFault registers, stack frames "
                  "and memory evidence without manual tool switching."),
-        (ORANGE, "≡",  "Audit-Ready\nTraceability",
-                 "100%", "bi-directional trace coverage",
-                 "Live traceability from market requirement through silicon "
-                 "to field telemetry — always current, always complete."),
-        (PURPLE, "⚡", "Faster\nDevelopment Cycles",
-                 "40%",  "reduction in time-to-market",
-                 "Automation of routine engineering tasks reclaims 30%+ "
-                 "of engineering bandwidth for creative, high-value work."),
+        (ORANGE, "PG",  "NPI Gate\nConfidence",
+                 "PG1/3/5", "demo-ready decisions",
+                 "AEPLO turns Discovery, Development and Validation evidence "
+                 "into clear decisions and action lists."),
+        (PURPLE, "⚡", "Embedded PDLC\nOptimisation",
+                 "AI",  "risk, test and fix focus",
+                 "ROVO Studio, Copilot and AEPLO agents optimise work across "
+                 "planning, coding, validation and launch preparation."),
     ]
 
     for i, (clr, icon, title, metric, metric_lbl, detail) in enumerate(outcomes):
@@ -1034,11 +1096,11 @@ def slide_09_outcomes():
             size=11.5, color=LIGHT)
 
     bottom_strip(sl)
-    slide_num(sl, 10)
+    slide_num(sl, 11)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 11 — CONCLUSION
+# SLIDE 12 — CONCLUSION
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_10_conclusion():
     sl = prs.slides.add_slide(BLANK)
@@ -1066,7 +1128,7 @@ def slide_10_conclusion():
     # Left content
     txt(sl, "CONCLUSION", Inches(0.38), Inches(0.72), Inches(5.5), Inches(0.38),
         size=11, bold=True, color=CYAN)
-    txt(sl, "Transform Your Embedded\nDevelopment Lifecycle",
+    txt(sl, "Transform Embedded PDLC\nfrom PG1 to PG5",
         Inches(0.38), Inches(1.08), Inches(5.8), Inches(1.05),
         size=28, bold=True, color=WHITE)
 
@@ -1074,15 +1136,15 @@ def slide_10_conclusion():
 
     # 3 conclusion messages
     msgs = [
-        (TEAL,   "From fragmented workflows",
-                 "Siloed tools, manual artefacts, and late defect discovery "
-                 "are replaced by a unified intelligent pipeline."),
-        (BLUE,   "To AI-driven continuous lifecycle",
-                 "Every stage — from requirements to end-of-life — is monitored, "
-                 "analysed, and optimised by specialized AI agents."),
-        (GREEN,  "Diagnose, fix and learn",
-                 "Sheraaz's JTAG copilot adds hardware-backed RCA and controlled fixes "
-                 "to the closed-loop QA learning engine."),
+        (TEAL,   "From fragmented embedded data",
+                 "Jira, Confluence, GitHub, QA and JTAG/SWD evidence become one "
+                 "connected AEPLO PDLC foundation."),
+        (BLUE,   "To intelligent NPI action",
+                 "Atlassian MCP, ROVO Studio, Copilot and AEPLO agents drive "
+                 "PG1 discovery, PG3 development and PG5 launch readiness."),
+        (GREEN,  "Optimise every gate",
+                 "The JTAG Accelerator adds hardware-backed RCA and controlled fixes "
+                 "to AI-optimised validation and launch decisions."),
     ]
 
     for i, (clr, heading, body) in enumerate(msgs):
@@ -1121,7 +1183,7 @@ def slide_10_conclusion():
         size=9, color=DIM, align=PP_ALIGN.CENTER)
 
     bottom_strip(sl)
-    slide_num(sl, 11)
+    slide_num(sl, 12)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1131,6 +1193,7 @@ slide_01_cover()
 slide_02_problem()
 slide_03_solution()
 slide_04_architecture()
+slide_05_connected_stack()
 slide_05_change_impact()
 slide_06_jtag_debug_copilot()
 slide_06_gatekeeper()
