@@ -124,138 +124,207 @@ def build_poster():
     slide = prs.slides.add_slide(BLANK)
     rect(slide, 0, 0, W, H, DARK)
     rect(slide, 0, 0, W, Inches(0.08), CYAN)
-    rect(slide, 0, H - Inches(0.08), W, Inches(0.08), PURPLE)
+    rect(slide, 0, H - Inches(0.08), W, Inches(0.08), GREEN)
 
-    # Decorative embedded/circuit motif.
-    for i in range(18):
-        rect(slide, Inches(8.8), Inches(0.32 + i * 0.36),
-             Inches(4.25), Inches(0.008), RGBColor(0x06, 0x1C, 0x38))
-    for i in range(11):
-        rect(slide, Inches(8.85 + i * 0.42), Inches(0.32),
-             Inches(0.008), Inches(6.45), RGBColor(0x06, 0x1C, 0x38))
-    oval(slide, Inches(10.85), Inches(0.78), Inches(1.9), Inches(1.9),
-         RGBColor(0x06, 0x1C, 0x38))
-    oval(slide, Inches(11.15), Inches(1.08), Inches(1.3), Inches(1.3), PANEL)
-    oval(slide, Inches(11.48), Inches(1.41), Inches(0.64), Inches(0.64), NAVY)
+    # Template-inspired dark tech backdrop.
+    rect(slide, 0, Inches(1.18), W, Inches(0.04), BLUE)
+    rect(slide, 0, Inches(1.75), W, Inches(0.02), RGBColor(0x11, 0x3A, 0x66))
+    for i in range(19):
+        rect(slide, Inches(8.7), Inches(0.15 + i * 0.32),
+             Inches(4.35), Inches(0.006), RGBColor(0x06, 0x1C, 0x38))
+    for i in range(12):
+        rect(slide, Inches(8.72 + i * 0.36), Inches(0.15),
+             Inches(0.006), Inches(6.85), RGBColor(0x06, 0x1C, 0x38))
+    oval(slide, Inches(11.72), Inches(0.14), Inches(0.5), Inches(0.5), CYAN)
+    oval(slide, Inches(11.86), Inches(0.28), Inches(0.22), Inches(0.22), WHITE)
 
-    # Header.
-    txt(slide, "CODING EMBEDDED WORKSTREAM", Inches(0.35), Inches(0.28),
-        Inches(5.7), Inches(0.35), size=13, bold=True, color=CYAN)
-    txt(slide, "AEPLO JTAG Accelerator for Embedded PDLC AI Optimisation",
-        Inches(0.35), Inches(0.68), Inches(8.95), Inches(0.58),
-        size=27, bold=True, color=WHITE)
+    # Header echoes the supplied template's strong impact statement.
+    txt(slide, "CONNECTED EMBEDDED DATA. INTELLIGENT PDLC ACTION.",
+        Inches(0.33), Inches(0.17), Inches(8.7), Inches(0.36),
+        size=23, bold=True, color=WHITE)
+    txt(slide, "REAL NPI IMPACT.",
+        Inches(0.33), Inches(0.55), Inches(5.0), Inches(0.42),
+        size=25, bold=True, color=CYAN)
     txt(slide,
-        "Common idea: make JTAG/SWD hardware evidence a native AEPLO capability, "
-        "optimising the embedded product development lifecycle from discovery to launch.",
-        Inches(0.38), Inches(1.27), Inches(8.7), Inches(0.48),
-        size=12.3, italic=True, color=LIGHT)
+        "AEPLO unifies Jira, Confluence, GitHub, Copilot, ROVO Studio and JTAG/SWD evidence "
+        "to optimise embedded PDLC decisions across PG1, PG3 and PG5.",
+        Inches(0.35), Inches(0.98), Inches(7.9), Inches(0.25),
+        size=9.8, color=LIGHT)
 
-    roundrect(slide, Inches(9.55), Inches(0.54), Inches(3.35), Inches(0.82), BLUE)
-    txt(slide, "NPI GATE DEMO PLAN", Inches(9.55), Inches(0.62),
-        Inches(3.35), Inches(0.25), size=12, bold=True,
-        color=WHITE, align=PP_ALIGN.CENTER)
-    txt(slide, "PG1 Discovery  ->  PG3 Development  ->  PG5 Validation & Launch Prep",
-        Inches(9.55), Inches(0.94), Inches(3.35), Inches(0.25), size=8.6, color=CYAN,
-        align=PP_ALIGN.CENTER)
+    roundrect(slide, Inches(8.85), Inches(0.12), Inches(4.15), Inches(0.98), PANEL)
+    txt(slide, "ONE AEPLO PLATFORM.", Inches(9.2), Inches(0.27),
+        Inches(2.5), Inches(0.25), size=13, bold=True, color=GREEN)
+    txt(slide, "EMBEDDED. PDLC. AI OPTIMISATION.", Inches(9.2), Inches(0.55),
+        Inches(3.35), Inches(0.24), size=12, bold=True, color=CYAN)
+    txt(slide, "JTAG Accelerator is a native AEPLO capability",
+        Inches(9.2), Inches(0.83), Inches(3.3), Inches(0.18),
+        size=8.3, color=LIGHT)
 
-    # Three emphasis pillars requested by the workstream.
-    pillars = [
-        (BLUE, "EMBEDDED", "MCU / RTOS / JTAG-SWD / peripherals / board evidence"),
-        (PURPLE, "PDLC", "Requirements -> code -> debug -> validate -> launch"),
-        (GREEN, "AI OPTIMISATION", "Risk scoring, RCA, test focus, controlled fixes"),
+    # Tool ribbon.
+    tools = [
+        ("ROVO Studio", PURPLE),
+        ("Copilot", GREEN),
+        ("Atlassian MCP", ORANGE),
+        ("GitHub", WHITE),
+        ("Jira", BLUE),
+        ("Confluence", CYAN),
     ]
-    for i, (color, title, body) in enumerate(pillars):
-        x = Inches(0.35 + i * 4.1)
-        roundrect(slide, x, Inches(1.92), Inches(3.85), Inches(0.82), PANEL)
-        rect(slide, x, Inches(1.92), Inches(0.06), Inches(0.82), color)
-        txt(slide, title, x + Inches(0.18), Inches(2.02),
-            Inches(1.55), Inches(0.25), size=11.5, bold=True, color=color)
-        txt(slide, body, x + Inches(1.55), Inches(1.98),
-            Inches(2.12), Inches(0.42), size=8.8, color=LIGHT)
+    for i, (name, color) in enumerate(tools):
+        x = Inches(0.28 + i * 2.06)
+        roundrect(slide, x, Inches(1.34), Inches(1.82), Inches(0.34), NAVY)
+        rect(slide, x, Inches(1.34), Inches(0.04), Inches(0.34), color)
+        txt(slide, name, x + Inches(0.12), Inches(1.42),
+            Inches(1.55), Inches(0.12), size=8.4, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
 
-    # AEPLO capability statement.
-    roundrect(slide, Inches(0.35), Inches(2.95), Inches(12.6), Inches(0.62), CARD)
-    rect(slide, Inches(0.35), Inches(2.95), Inches(0.06), Inches(0.62), CYAN)
-    txt(slide, "AEPLO CAPABILITY", Inches(0.55), Inches(3.08),
-        Inches(1.9), Inches(0.25), size=11.5, bold=True, color=CYAN)
-    txt(slide,
-        "JTAG Accelerator is part of AEPLO: a multi-agent embedded coding accelerator that links Jira, IDE, Git, "
-        "J-Link/JTAG, target MCU evidence, AI root-cause analysis, controlled PRs and release gates.",
-        Inches(2.32), Inches(3.06), Inches(10.35), Inches(0.28), size=9.7, color=LIGHT)
-
-    # NPI gate demo flow.
-    txt(slide, "DEMO BY NPI GATES", Inches(0.35), Inches(3.78),
-        Inches(2.8), Inches(0.28), size=12.5, bold=True, color=WHITE)
-    gates = [
+    # Main connected platform columns.
+    columns = [
+        (
+            GREEN,
+            "1. EMBEDDED DATA SOURCES",
+            "Discovery + engineering context",
+            [
+                ("Jira", "NPI epics, defects, decisions"),
+                ("Confluence", "PRD, architecture, lessons"),
+                ("GitHub", "Code, PRs, branches, reviews"),
+                ("JTAG/SWD", "MCU registers, memory, traces"),
+            ],
+        ),
         (
             BLUE,
-            "PG1",
-            "DISCOVERY",
+            "2. UNIFIED PDLC FOUNDATION",
+            "Single source of truth",
             [
-                "Ingest PRD, Jira themes, defect history and target board context.",
-                "AI maps PDLC risks, trace gaps and embedded debug hotspots.",
-                "Demo output: risk-backed scope, board setup and validation plan.",
+                ("Traceability", "Requirements -> code -> test"),
+                ("Knowledge Graph", "Board, firmware, defect links"),
+                ("Evidence Lake", "Logs, dumps, probe sessions"),
+                ("NPI Context", "PG1 / PG3 / PG5 gates"),
             ],
         ),
         (
             ORANGE,
-            "PG3",
-            "DEVELOPMENT",
+            "3. AEPLO ORCHESTRATION",
+            "Work that flows",
             [
-                "JTAG Accelerator attaches to IDE, J-Link and target MCU.",
-                "Fault Analyzer, Variable Tracer and Peripheral Inspector diagnose coding defects.",
-                "Demo output: RCA, guarded patch, PR and register/memory evidence.",
+                ("Atlassian MCP", "Jira + Confluence actions"),
+                ("JTAG Accelerator", "Hardware-backed RCA"),
+                ("Release Gate", "READY / NOT_READY verdict"),
+                ("GitHub Automation", "Branch, PR, review evidence"),
             ],
         ),
         (
-            GREEN,
-            "PG5",
-            "VALIDATION & LAUNCH PREP",
+            PURPLE,
+            "4. AI-POWERED EXPERIENCES",
+            "Actionable intelligence",
             [
-                "AEPLO prioritises tests, checks fix evidence and updates traceability.",
-                "Release Gate evaluates code, QA, hardware proof and launch readiness.",
-                "Demo output: READY / NOT_READY verdict with action list.",
+                ("ROVO Studio", "NPI demo cockpit"),
+                ("Copilot", "Code fix and explanation"),
+                ("AI Agents", "Fault, variable, peripheral RCA"),
+                ("AI Optimisation", "Risk, tests, fixes, readiness"),
+            ],
+        ),
+        (
+            TEAL,
+            "5. NPI GATE OUTCOMES",
+            "Demo aligned to phases",
+            [
+                ("PG1 Discovery", "Risk-backed scope and plan"),
+                ("PG3 Development", "RCA, patch, PR, evidence"),
+                ("PG5 Validation", "Launch readiness action list"),
+                ("PDLC Impact", "Faster debug, better decisions"),
             ],
         ),
     ]
-    for i, (color, gate, title, items) in enumerate(gates):
-        x = Inches(0.35 + i * 4.27)
-        roundrect(slide, x, Inches(4.12), Inches(3.9), Inches(1.72), CARD)
-        rect(slide, x, Inches(4.12), Inches(3.9), Inches(0.06), color)
-        oval(slide, x + Inches(0.18), Inches(4.34), Inches(0.6), Inches(0.6), color)
-        txt(slide, gate, x + Inches(0.18), Inches(4.49),
-            Inches(0.6), Inches(0.18), size=12, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-        txt(slide, title, x + Inches(0.92), Inches(4.31),
-            Inches(2.75), Inches(0.28), size=12.5, bold=True, color=color)
-        bullet_list(slide, items, x + Inches(0.22), Inches(4.82),
-                    Inches(3.45), Inches(0.78), size=7.8, color=LIGHT)
-        if i < len(gates) - 1:
-            arrow(slide, x + Inches(3.95), Inches(4.86), Inches(0.58), color=CYAN)
 
-    # Bottom demo storyline and outcomes.
-    roundrect(slide, Inches(0.35), Inches(6.12), Inches(6.45), Inches(0.9), PANEL)
-    rect(slide, Inches(0.35), Inches(6.12), Inches(0.06), Inches(0.9), PURPLE)
-    txt(slide, "POSTER MESSAGE", Inches(0.55), Inches(6.22),
-        Inches(1.75), Inches(0.24), size=11.2, bold=True, color=PURPLE)
+    x_positions = [0.24, 2.27, 4.5, 6.73, 8.96]
+    widths = [1.82, 2.02, 2.02, 2.02, 1.92]
+    for idx, (color, title, subtitle, items) in enumerate(columns):
+        x = Inches(x_positions[idx])
+        w = Inches(widths[idx])
+        y = Inches(1.92)
+        roundrect(slide, x, y, w, Inches(3.65), CARD)
+        rect(slide, x, y, w, Inches(0.06), color)
+        txt(slide, title, x + Inches(0.08), y + Inches(0.12),
+            w - Inches(0.16), Inches(0.18), size=7.4, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+        txt(slide, subtitle, x + Inches(0.12), y + Inches(0.42),
+            w - Inches(0.24), Inches(0.18), size=7.3, color=color, align=PP_ALIGN.CENTER)
+        for j, (label, body) in enumerate(items):
+            iy = y + Inches(0.82 + j * 0.66)
+            roundrect(slide, x + Inches(0.12), iy, w - Inches(0.24), Inches(0.48), PANEL)
+            oval(slide, x + Inches(0.22), iy + Inches(0.15), Inches(0.18), Inches(0.18), color)
+            txt(slide, label, x + Inches(0.46), iy + Inches(0.08),
+                w - Inches(0.62), Inches(0.13), size=7.4, bold=True, color=WHITE)
+            txt(slide, body, x + Inches(0.46), iy + Inches(0.25),
+                w - Inches(0.62), Inches(0.13), size=5.8, color=LIGHT)
+        if idx < len(columns) - 1:
+            arrow(slide, x + w + Inches(0.03), y + Inches(1.75), Inches(0.3), CYAN)
+
+    # Right value panel from the supplied template.
+    roundrect(slide, Inches(11.1), Inches(1.72), Inches(2.02), Inches(3.92), RGBColor(0x12, 0x22, 0x40))
+    rect(slide, Inches(11.1), Inches(1.72), Inches(2.02), Inches(0.05), CYAN)
+    txt(slide, "BUSINESS VALUE", Inches(11.22), Inches(1.88),
+        Inches(1.72), Inches(0.24), size=11.2, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+    txt(slide, "THAT EMBEDDED TEAMS CARE ABOUT", Inches(11.24), Inches(2.14),
+        Inches(1.68), Inches(0.18), size=6.7, bold=True, color=LIGHT, align=PP_ALIGN.CENTER)
+    values = [
+        (GREEN, "ACCELERATE NPI", "PG1 risk to PG5 launch evidence"),
+        (ORANGE, "REDUCE DEBUG CYCLE", "JTAG-backed RCA and patches"),
+        (PURPLE, "IMPROVE QUALITY", "AI-focused tests and gates"),
+        (CYAN, "STRENGTHEN GOVERNANCE", "Traceability and proof in Jira"),
+    ]
+    for i, (color, heading, body) in enumerate(values):
+        y = Inches(2.55 + i * 0.68)
+        roundrect(slide, Inches(11.25), y, Inches(1.72), Inches(0.5), PANEL)
+        oval(slide, Inches(11.38), y + Inches(0.13), Inches(0.24), Inches(0.24), color)
+        txt(slide, heading, Inches(11.72), y + Inches(0.08),
+            Inches(1.08), Inches(0.11), size=6.5, bold=True, color=color)
+        txt(slide, body, Inches(11.72), y + Inches(0.24),
+            Inches(1.08), Inches(0.13), size=5.3, color=LIGHT)
+
+    # Bottom band: from data to impact.
+    roundrect(slide, Inches(0.28), Inches(5.86), Inches(7.25), Inches(0.78), NAVY)
+    txt(slide, "FROM NPI DATA TO EMBEDDED IMPACT", Inches(0.52), Inches(5.96),
+        Inches(2.8), Inches(0.18), size=9.5, bold=True, color=WHITE)
+    flow = [
+        ("Collect", "Jira + Confluence"),
+        ("Unify", "AEPLO PDLC graph"),
+        ("Orchestrate", "Atlassian MCP"),
+        ("Diagnose", "JTAG Accelerator"),
+        ("Optimise", "ROVO + Copilot"),
+        ("Impact", "PG5 launch"),
+    ]
+    for i, (label, body) in enumerate(flow):
+        cx = Inches(0.75 + i * 1.1)
+        oval(slide, cx, Inches(6.22), Inches(0.34), Inches(0.34),
+             [BLUE, GREEN, ORANGE, PURPLE, CYAN, GREEN][i])
+        txt(slide, str(i + 1), cx, Inches(6.29), Inches(0.34), Inches(0.08),
+            size=6.5, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+        txt(slide, label, cx - Inches(0.22), Inches(6.61),
+            Inches(0.78), Inches(0.11), size=6.3, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+        txt(slide, body, cx - Inches(0.3), Inches(6.74),
+            Inches(0.95), Inches(0.11), size=4.9, color=LIGHT, align=PP_ALIGN.CENTER)
+        if i < len(flow) - 1:
+            arrow(slide, cx + Inches(0.44), Inches(6.28), Inches(0.35), color=LIGHT)
+
+    # NPI phase banner.
+    roundrect(slide, Inches(7.78), Inches(5.86), Inches(5.18), Inches(0.78), PANEL)
+    txt(slide, "DEMO PHASES", Inches(7.98), Inches(5.98),
+        Inches(1.1), Inches(0.16), size=8.8, bold=True, color=CYAN)
+    phases = [("PG1", "Discovery", BLUE), ("PG3", "Development", ORANGE), ("PG5", "Validation & Launch Prep", GREEN)]
+    for i, (gate, label, color) in enumerate(phases):
+        x = Inches(8.0 + i * 1.62)
+        roundrect(slide, x, Inches(6.25), Inches(1.42), Inches(0.28), color)
+        txt(slide, f"{gate}  {label}", x, Inches(6.31),
+            Inches(1.42), Inches(0.08), size=6.5, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+
+    # Footer strip.
+    rect(slide, 0, Inches(7.02), W, Inches(0.4), RGBColor(0xD7, 0xF7, 0xFF))
+    txt(slide, "Better Together. Built for Embedded PDLC Impact.",
+        Inches(0.28), Inches(7.12), Inches(3.3), Inches(0.12),
+        size=9.2, bold=True, color=NAVY)
     txt(slide,
-        "AEPLO optimises embedded PDLC decisions at each NPI gate: discover risk early, "
-        "accelerate coding/debug with JTAG evidence, and validate launch readiness with AI gates.",
-        Inches(0.55), Inches(6.5), Inches(5.95), Inches(0.28), size=9.2, color=LIGHT)
-
-    txt(slide, "SUCCESS SIGNALS", Inches(7.12), Inches(6.06),
-        Inches(2.0), Inches(0.24), size=11.2, bold=True, color=GREEN)
-    stat_card(slide, Inches(7.12), Inches(6.36), Inches(1.38), "PG1", "risk clarity", BLUE)
-    stat_card(slide, Inches(8.66), Inches(6.36), Inches(1.38), "<30m", "RCA target", ORANGE)
-    stat_card(slide, Inches(10.2), Inches(6.36), Inches(1.38), "100%", "evidence link", PURPLE)
-    stat_card(slide, Inches(11.74), Inches(6.36), Inches(1.2), "PG5", "launch gate", GREEN)
-
-    # Footer.
-    txt(slide, "Common Idea | AEPLO + JTAG Accelerator | Embedded PDLC AI Optimisation",
-        Inches(0.35), Inches(7.18), Inches(8.4), Inches(0.18),
-        size=8.5, color=DIM)
-    txt(slide, "One-page poster candidate for Coding Embedded Workstream",
-        Inches(9.15), Inches(7.18), Inches(3.8), Inches(0.18),
-        size=8.5, color=DIM, align=PP_ALIGN.RIGHT)
+        "ROVO Studio | Copilot | Atlassian MCP | GitHub | Jira | Confluence | AEPLO JTAG Accelerator",
+        Inches(4.0), Inches(7.12), Inches(8.9), Inches(0.12),
+        size=7.1, color=NAVY, align=PP_ALIGN.RIGHT)
 
 
 build_poster()
