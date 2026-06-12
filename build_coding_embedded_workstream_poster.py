@@ -156,7 +156,7 @@ def build_poster():
         Inches(2.5), Inches(0.25), size=13, bold=True, color=GREEN)
     txt(slide, "EMBEDDED. PDLC. AI OPTIMISATION.", Inches(9.2), Inches(0.55),
         Inches(3.35), Inches(0.24), size=12, bold=True, color=CYAN)
-    txt(slide, "JTAG Accelerator is a native AEPLO capability",
+    txt(slide, "Honeywell BA Buildathon | 17 Jun 2026",
         Inches(9.2), Inches(0.83), Inches(3.3), Inches(0.18),
         size=8.3, color=LIGHT)
 
@@ -318,13 +318,17 @@ def build_poster():
 
     # Footer strip.
     rect(slide, 0, Inches(7.02), W, Inches(0.4), RGBColor(0xD7, 0xF7, 0xFF))
-    txt(slide, "Better Together. Built for Embedded PDLC Impact.",
+    txt(slide, "Honeywell BA Buildathon. Built for Embedded PDLC Impact.",
         Inches(0.28), Inches(7.12), Inches(3.3), Inches(0.12),
-        size=9.2, bold=True, color=NAVY)
+        size=8.5, bold=True, color=NAVY)
+    txt(slide,
+        "Presenter: Shyam Shrivastava, Project Lead | Team: Atharva, Manas, Sheraaz",
+        Inches(3.75), Inches(7.09), Inches(9.15), Inches(0.11),
+        size=6.8, bold=True, color=NAVY, align=PP_ALIGN.RIGHT)
     txt(slide,
         "ROVO Studio | Copilot | Atlassian MCP | GitHub | Jira | Confluence | AEPLO JTAG Accelerator",
-        Inches(4.0), Inches(7.12), Inches(8.9), Inches(0.12),
-        size=7.1, color=NAVY, align=PP_ALIGN.RIGHT)
+        Inches(3.75), Inches(7.25), Inches(9.15), Inches(0.10),
+        size=6.2, color=NAVY, align=PP_ALIGN.RIGHT)
 
 
 build_poster()

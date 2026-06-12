@@ -327,10 +327,13 @@ def slide_01_cover():
         Inches(0.46), Inches(4.18), Inches(5.4), Inches(0.85),
         size=14.5, italic=True, color=LIGHT)
 
-    # Bottom date/confidential
-    txt(sl, "May 2026   |   CONFIDENTIAL",
+    # Bottom date/team context
+    txt(sl, "Honeywell BA Buildathon | 17 Jun 2026 | CONFIDENTIAL",
         Inches(0.28), Inches(5.35), Inches(4.0), Inches(0.38),
         size=11, color=DIM)
+    txt(sl, "Presenter: Shyam Shrivastava, Project Lead | Team: Atharva, Manas, Sheraaz",
+        Inches(0.28), Inches(5.68), Inches(6.2), Inches(0.28),
+        size=8.8, color=LIGHT)
 
     # Three accent lines bottom-left
     for i, clr in enumerate([CYAN, BLUE, RGBColor(0x00,0x40,0x70)]):

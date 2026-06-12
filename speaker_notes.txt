@@ -10,7 +10,9 @@ SLIDE 1 - COVER  (~16 sec)
 "Today we are presenting the AEPLO JTAG Accelerator for
 Embedded PDLC AI Optimisation. The demo story follows our
 NPI gates: PG1 Discovery, PG3 Development, and PG5 Validation
-and Launch Preparation."
+and Launch Preparation. I am Shyam Shrivastava, Project Lead
+in Honeywell BA, working with Atharva, Manas and Sheraaz for
+the Buildathon on 17 June."
 
 --------------------------------------------------------
 SLIDE 2 - THE PROBLEM  (~20 sec)
