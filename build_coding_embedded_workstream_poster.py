@@ -5,6 +5,7 @@ Generates: Coding Embedded Workstream - Common Idea Poster.pptx
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
@@ -103,15 +104,11 @@ def bullet_list(slide, items, l, t, w, h, size=10.5, color=LIGHT):
 
 
 def arrow(slide, x, y, w, color=CYAN):
-    rect(slide, x, y + Inches(0.09), w - Inches(0.18), Inches(0.035), color)
-    for i in range(8):
-        frac = i / 8
-        rect(slide, x + w - Inches(0.18) + Inches(0.018) * i,
-             y + Inches(0.015) + Inches(0.018) * i,
-             Inches(0.02), Inches(0.18) - Inches(0.018) * i, color)
-        rect(slide, x + w - Inches(0.18) + Inches(0.018) * i,
-             y + Inches(0.125) - Inches(0.018) * i,
-             Inches(0.02), Inches(0.18) - Inches(0.018) * i, color)
+    shape = slide.shapes.add_shape(MSO_SHAPE.RIGHT_ARROW, x, y, w, Inches(0.2))
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = color
+    shape.line.fill.background()
+    return shape
 
 
 def stat_card(slide, l, t, w, value, label, color):
@@ -202,7 +199,7 @@ def build_poster():
         txt(slide, label, x - Inches(0.24), Inches(4.92), Inches(1.02), Inches(0.38),
             size=8.8, bold=True, color=LIGHT, align=PP_ALIGN.CENTER)
         if i < len(workflow) - 1:
-            arrow(slide, x + Inches(0.68), Inches(4.31), Inches(0.82), color=CYAN)
+            arrow(slide, x + Inches(0.75), Inches(4.33), Inches(1.05), color=CYAN)
 
     # Agent stack.
     roundrect(slide, Inches(9.25), Inches(1.65), Inches(3.65), Inches(2.2), CARD)
