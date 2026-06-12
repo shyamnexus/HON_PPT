@@ -38,7 +38,7 @@ prs.slide_width  = W
 prs.slide_height = H
 BLANK = prs.slide_layouts[6]
 
-TOTAL = 12
+TOTAL = 13
 
 # ══════════════════════════════════════════════════════════════════════════════
 # PRIMITIVE HELPERS
@@ -1103,7 +1103,114 @@ def slide_09_outcomes():
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# SLIDE 12 — CONCLUSION
+# SLIDE 12 — EVALUATION MATRIX
+# ══════════════════════════════════════════════════════════════════════════════
+def slide_10_evaluation_matrix():
+    sl = prs.slides.add_slide(BLANK)
+    bg(sl, DARK_NAVY)
+    rect(sl, 0, 0, W, Inches(0.055), CYAN)
+    section_pill(sl, "Evaluation Matrix", CYAN)
+    slide_title(sl, "Criteria & Key Metric Focus")
+    hdivider(sl, Inches(1.45), color=CYAN)
+
+    txt(sl,
+        "AEPLO JTAG Accelerator is positioned against the judging matrix with measurable stream value, "
+        "platform readiness, live execution proof and agentic AI governance.",
+        Inches(0.38), Inches(1.55), Inches(9.25), Inches(0.44),
+        size=11.8, italic=True, color=LIGHT)
+
+    # Table geometry mirrors the supplied two-column matrix while using deck styling.
+    left = Inches(0.35)
+    top = Inches(2.08)
+    table_w = Inches(9.3)
+    criteria_w = Inches(3.35)
+    metric_w = table_w - criteria_w
+    header_h = Inches(0.42)
+    row_heights = [Inches(0.72), Inches(0.52), Inches(0.72), Inches(1.02), Inches(1.18)]
+    colors = [GREEN, BLUE, ORANGE, PURPLE, CYAN]
+
+    roundrect(sl, left, top, table_w, header_h + sum(row_heights), PANEL, adj=9000)
+    rect(sl, left, top, table_w, Inches(0.055), CYAN)
+    rect(sl, left, top, criteria_w, header_h, RGBColor(0xD7, 0xF7, 0xFF))
+    rect(sl, left + criteria_w, top, metric_w, header_h, RGBColor(0xD7, 0xF7, 0xFF))
+    txt(sl, "CRITERIA", left, top + Inches(0.08), criteria_w, Inches(0.18),
+        size=10.5, bold=True, color=NAVY, align=PP_ALIGN.CENTER)
+    txt(sl, "KEY METRIC FOCUS", left + criteria_w, top + Inches(0.08), metric_w, Inches(0.18),
+        size=10.5, bold=True, color=NAVY, align=PP_ALIGN.CENTER)
+
+    matrix_rows = [
+        (
+            "Stream Value",
+            "- PDLC engineering lead-time drop\n"
+            "- Defect rate reduction\n"
+            "- Projected productivity savings 2026 H2 and 2027",
+        ),
+        (
+            "Platformization",
+            "- BA-org hosting readiness %",
+        ),
+        (
+            "Live Execution",
+            "A fully functional, resilient working prototype and impact in ongoing active projects",
+        ),
+        (
+            "Agentic AI design pattern compliance\n"
+            "[Agents orchestration, routing protocols,\n"
+            "MCP Servers, Skills, etc]",
+            "- Inter-agent handoff efficiency\n"
+            "- Twin simulation accuracy\n"
+            "- Tool and skill reusability\n"
+            "- MCP Server usage relevancy",
+        ),
+        (
+            "LLM selection strategies\n"
+            "[GitHub Copilot & OpenAI] & AI Token\n"
+            "usage Optimization\n"
+            "[LLM selection, Context Management,\n"
+            "and Prompt engineering]",
+            "- Token reduction percentage [baseline vs actual]\n"
+            "- Cost-per-request savings\n"
+            "- Tool-calling JSON accuracy\n"
+            "- Prompt caching utilization",
+        ),
+    ]
+
+    y = top + header_h
+    for idx, ((criterion, metrics), row_h) in enumerate(zip(matrix_rows, row_heights)):
+        color = colors[idx]
+        fill = CARD if idx % 2 == 0 else RGBColor(0x0B, 0x23, 0x3F)
+
+        rect(sl, left, y, criteria_w, row_h, fill)
+        rect(sl, left + criteria_w, y, metric_w, row_h, fill)
+        rect(sl, left, y, Inches(0.055), row_h, color)
+        rect(sl, left + criteria_w, y, Inches(0.022), row_h, RGBColor(0x20, 0x4A, 0x70))
+        rect(sl, left, y, table_w, Inches(0.012), RGBColor(0x20, 0x4A, 0x70))
+
+        title_size = 11.0 if idx < 3 else 8.3
+        metric_size = 9.4 if idx < 3 else 8.2
+        txt(sl, criterion,
+            left + Inches(0.18), y + Inches(0.12),
+            criteria_w - Inches(0.35), row_h - Inches(0.18),
+            size=title_size, bold=True, color=WHITE)
+        txt(sl, metrics,
+            left + criteria_w + Inches(0.22), y + Inches(0.12),
+            metric_w - Inches(0.42), row_h - Inches(0.18),
+            size=metric_size, color=LIGHT)
+        y += row_h
+
+    # Bottom emphasis strip connects the matrix to the deck narrative.
+    roundrect(sl, Inches(0.35), Inches(6.86), Inches(9.3), Inches(0.24), MID, adj=8000)
+    txt(sl,
+        "FOCUS: prove measurable PDLC impact with a reusable, hosted, agentic-AI execution pattern.",
+        Inches(0.55), Inches(6.91), Inches(8.9), Inches(0.08),
+        size=7.6, bold=True, color=GREEN, align=PP_ALIGN.CENTER)
+
+    bottom_strip(sl)
+    slide_num(sl, 12)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SLIDE 13 — CONCLUSION
 # ══════════════════════════════════════════════════════════════════════════════
 def slide_10_conclusion():
     sl = prs.slides.add_slide(BLANK)
@@ -1186,7 +1293,7 @@ def slide_10_conclusion():
         size=9, color=DIM, align=PP_ALIGN.CENTER)
 
     bottom_strip(sl)
-    slide_num(sl, 12)
+    slide_num(sl, 13)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1203,6 +1310,7 @@ slide_06_gatekeeper()
 slide_07_qa2release()
 slide_08_demo()
 slide_09_outcomes()
+slide_10_evaluation_matrix()
 slide_10_conclusion()
 
 OUT = "/workspace/AI-Driven Embedded Product Lifecycle OrchestratorV3.pptx"
