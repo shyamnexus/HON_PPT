@@ -1,107 +1,134 @@
 ========================================================
 AEPLO JTAG ACCELERATOR FOR EMBEDDED PDLC AI OPTIMISATION
-Speaker Notes - 4-Minute Presentation
-~20 seconds per slide
+Speaker Notes - V7 / Honeywell Theme
+14-slide presentation | target: ~5 minutes
 ========================================================
 
 --------------------------------------------------------
-SLIDE 1 - COVER  (~16 sec)
+SLIDE 1 - COVER  (~15 sec)
 --------------------------------------------------------
 "Today we are presenting the AEPLO JTAG Accelerator for
-Embedded PDLC AI Optimisation. The demo story follows our
-NPI gates: PG1 Discovery, PG3 Development, and PG5 Validation
-and Launch Preparation. I am Shyam Shrivastava, Project Lead
-in Honeywell BA, working with Atharva, Manas and Sheraaz for
-the Buildathon on 17 June."
+Embedded PDLC AI Optimisation. The story is simple: connect
+planning data, code, AI assistance, and JTAG evidence so we
+can move faster from discovery to validated launch readiness."
 
 --------------------------------------------------------
 SLIDE 2 - THE PROBLEM  (~20 sec)
 --------------------------------------------------------
 "Embedded PDLC data is fragmented. Jira, Confluence, GitHub,
-QA results, and JTAG or SWD hardware evidence are not connected
-well enough for fast NPI decisions. That creates blind spots
-from discovery all the way to launch readiness."
+QA results, and JTAG/SWD hardware evidence often sit in
+separate places. That slows decisions across PG1, PG3, and PG5
+and makes launch readiness harder to prove."
 
 --------------------------------------------------------
 SLIDE 3 - SOLUTION  (~20 sec)
 --------------------------------------------------------
-"AEPLO becomes the connected platform. It treats the JTAG
-Accelerator as a native capability, combines embedded hardware
-evidence with PDLC traceability, and applies AI optimisation
-through ROVO Studio, Copilot, and specialised agents."
+"AEPLO becomes the connected platform. It treats JTAG evidence
+as a native PDLC signal, combines it with traceability and
+project context, and applies AI optimisation through ROVO
+Studio, Copilot, and specialised agents."
 
 --------------------------------------------------------
 SLIDE 4 - ARCHITECTURE  (~20 sec)
 --------------------------------------------------------
-"The architecture links Jira, Confluence, GitHub, Copilot,
-ROVO Studio, Atlassian MCP and JTAG/SWD evidence. AEPLO turns
-that connected data into orchestration, controlled fixes, gate
+"The architecture connects Jira, Confluence, GitHub, Copilot,
+ROVO Studio, Atlassian MCP, and JTAG/SWD evidence. AEPLO then
+turns that data into orchestration, controlled fixes, gate
 verdicts, and reusable launch evidence."
 
 --------------------------------------------------------
-SLIDE 5 - CONNECTED PLATFORM STACK  (~22 sec)
+SLIDE 5 - CONNECTED PLATFORM STACK  (~20 sec)
 --------------------------------------------------------
-"This is the actual tool stack for the demo. Jira and Confluence
-carry planning and knowledge. GitHub and Copilot support code
-change. Atlassian MCP and AEPLO orchestrate work. ROVO Studio
-is the AI experience layer. The JTAG Accelerator brings in
-target MCU evidence."
+"This is the working tool stack. Jira and Confluence carry the
+planning and knowledge base. GitHub and Copilot support code
+change. Atlassian MCP and AEPLO orchestrate the workflow. The
+JTAG Accelerator adds physical target evidence."
 
 --------------------------------------------------------
 SLIDE 6 - PG1 DISCOVERY  (~20 sec)
 --------------------------------------------------------
 "At PG1, AEPLO collects PRD context, Jira themes, Confluence
-architecture, GitHub history, and board assumptions. AI maps
-PDLC risk, trace gaps and embedded debug hotspots, then produces
-a demo scope and validation plan."
+architecture, GitHub history, and target-board assumptions. It
+maps PDLC risks and embedded debug hotspots, then produces a
+risk-backed demo scope and validation plan."
 
 --------------------------------------------------------
-SLIDE 7 - PG3 DEVELOPMENT  (~24 sec)
+SLIDE 7 - PG3 DEVELOPMENT  (~22 sec)
 --------------------------------------------------------
-"At PG3, the JTAG Accelerator attaches to the IDE, J-Link probe
-and target MCU. It captures registers, stack frames and memory
-evidence, routes diagnosis to specialist agents, and uses Copilot
-to create a controlled GitHub PR linked back to Jira."
+"At PG3, the JTAG Accelerator converts embedded coding defects
+into hardware-backed root-cause analysis. It captures registers,
+stack frames, memory evidence, and probe logs, then links the
+controlled fix back to GitHub and Jira."
 
 --------------------------------------------------------
-SLIDE 8 - PG5 VALIDATION GATEKEEPER  (~20 sec)
+SLIDE 8 - AGENT JTAG DEBUGGING: FROM FAILURE TO FIX  (~35 sec)
 --------------------------------------------------------
-"At PG5, AEPLO evaluates code, QA results, traceability and
-hardware proof together. The gatekeeper produces a READY or
-NOT_READY verdict with a prioritized action list for validation
-and launch preparation."
+"This slide shows three real-time use cases for the JTAG agent.
+First, a bootloader-to-application handoff caused a HardFault
+because SysTick was enabled but the application vector table had
+no SysTick handler. The agent correlated the PC, vector table,
+and peripheral state and reduced diagnosis from days to about
+45 minutes.
+
+Second, the agent emulated a sub-zero ADC condition at room
+temperature. That allowed driver reinitialisation and gain
+adjustment to be validated without waiting for thermal chamber
+cycling.
+
+Third, for a boot failure after flashing a new build, the agent
+traced the Program Counter and identified execution going to
+system ROM instead of internal flash. The key message is that
+JTAG evidence becomes actionable AI context, not just a debug
+artifact."
 
 --------------------------------------------------------
-SLIDE 9 - QA2RELEASE INTELLIGENCE  (~20 sec)
+SLIDE 9 - PG5 VALIDATION GATEKEEPER  (~20 sec)
+--------------------------------------------------------
+"At PG5, AEPLO evaluates code, QA results, traceability, and
+JTAG/SWD evidence together. The gatekeeper produces a clear
+READY or NOT_READY verdict, plus a prioritized remediation list
+for validation and launch preparation."
+
+--------------------------------------------------------
+SLIDE 10 - QA2RELEASE INTELLIGENCE  (~20 sec)
 --------------------------------------------------------
 "QA2Release closes the loop. Test failures and JTAG evidence
-feed root-cause analysis, test optimisation and next-release
-learning. The output becomes Jira actions, Confluence summaries
-and improved gate evidence."
+feed root-cause analysis, test optimisation, and next-release
+learning. The output becomes Jira actions, Confluence summaries,
+and better evidence for the next gate."
 
 --------------------------------------------------------
-SLIDE 10 - DEMO FLOW  (~22 sec)
+SLIDE 11 - DEMO FLOW  (~22 sec)
 --------------------------------------------------------
-"The live demo has three stages: PG1 discovery through ROVO
-Studio, PG3 development using the JTAG Accelerator and Copilot,
+"The live demo follows three stages: PG1 discovery in ROVO
+Studio, PG3 development with the JTAG Accelerator and Copilot,
 and PG5 validation with AEPLO release gating and automated
 launch-prep evidence."
 
 --------------------------------------------------------
-SLIDE 11 - BUSINESS OUTCOMES  (~20 sec)
+SLIDE 12 - BUSINESS OUTCOMES  (~22 sec)
 --------------------------------------------------------
-"The value is practical for embedded teams: reduced defect
-leakage, faster firmware root cause, more confident NPI gate
-decisions, and AI-optimised PDLC work across planning, coding,
-validation and launch preparation."
+"The value for embedded teams is practical: reduced defect
+leakage, faster firmware root cause, clearer NPI gate
+confidence, and AI-optimised PDLC work across planning, coding,
+validation, and launch preparation."
 
 --------------------------------------------------------
-SLIDE 12 - CONCLUSION  (~16 sec)
+SLIDE 13 - EVALUATION MATRIX  (~25 sec)
 --------------------------------------------------------
-"The common idea is simple: connected embedded data plus
-intelligent PDLC action. AEPLO, with the JTAG Accelerator inside
-it, helps optimise every gate from PG1 to PG5. Thank you."
+"The matrix connects the demo to measurable judging criteria.
+We show a 41 percent lead-time drop, 60 percent fewer projected
+defect escapes, 85 percent BA hosting readiness, and measurable
+agentic AI execution metrics including handoff success, tool
+calling accuracy, and prompt caching utilisation."
+
+--------------------------------------------------------
+SLIDE 14 - CONCLUSION  (~18 sec)
+--------------------------------------------------------
+"The common idea is connected embedded data plus intelligent
+PDLC action. AEPLO, with the JTAG Accelerator inside it, helps
+optimise every gate from PG1 to PG5. Thank you."
 
 ========================================================
-TOTAL: ~4 minutes  |  12 slides  |  ~20 sec/slide
+TOTAL: ~5 minutes  |  14 slides  |  V7 deck
 ========================================================
