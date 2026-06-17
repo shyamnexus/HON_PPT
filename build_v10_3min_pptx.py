@@ -10,6 +10,9 @@ import re
 from pathlib import Path
 
 from pptx import Presentation
+from pptx.dml.color import RGBColor
+from pptx.enum.text import PP_ALIGN
+from pptx.util import Inches, Pt
 
 
 WORKSPACE = Path("/workspace")
@@ -21,6 +24,83 @@ OUTPUT = WORKSPACE / "AI-Driven Embedded Product Lifecycle OrchestratorV10.pptx"
 # 8 JTAG debug, 9 PG5 gate, 10 QA loop, 14 evaluation matrix.
 KEEP_SLIDES = {1, 2, 4, 6, 7, 8, 9, 10, 14}
 TOTAL_SLIDES = 9
+
+BLUE = RGBColor(0x00, 0x72, 0xC6)
+CYAN = RGBColor(0x00, 0xC8, 0xF0)
+TEAL = RGBColor(0x00, 0xA8, 0x9A)
+CARD = RGBColor(0x0F, 0x28, 0x45)
+NAVY = RGBColor(0x05, 0x14, 0x2E)
+WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+LIGHT = RGBColor(0xB8, 0xD0, 0xEC)
+GREEN = RGBColor(0x00, 0xD4, 0x8A)
+ORANGE = RGBColor(0xFF, 0x8C, 0x00)
+PURPLE = RGBColor(0x8B, 0x5C, 0xF6)
+GOLD = RGBColor(0xF5, 0xC5, 0x18)
+RED = RGBColor(0xFF, 0x3A, 0x3A)
+
+
+def add_shape(slide, shape_type, x, y, w, h, fill, line=None):
+    shape = slide.shapes.add_shape(shape_type, x, y, w, h)
+    shape.fill.solid()
+    shape.fill.fore_color.rgb = fill
+    if line:
+        shape.line.color.rgb = line
+    else:
+        shape.line.fill.background()
+    return shape
+
+
+def add_text(slide, text, x, y, w, h, size=7.5, bold=False, color=WHITE, align=PP_ALIGN.CENTER):
+    box = slide.shapes.add_textbox(x, y, w, h)
+    tf = box.text_frame
+    tf.margin_left = Inches(0.02)
+    tf.margin_right = Inches(0.02)
+    tf.margin_top = Inches(0.0)
+    tf.margin_bottom = Inches(0.0)
+    p = tf.paragraphs[0]
+    p.alignment = align
+    run = p.add_run()
+    run.text = text
+    run.font.name = "Segoe UI"
+    run.font.size = Pt(size)
+    run.font.bold = bold
+    run.font.color.rgb = color
+    return box
+
+
+def add_tool_badge(slide, x, y, label, icon, color, width=Inches(1.05), height=Inches(0.32)):
+    """Add a compact V9-themed tool icon/badge."""
+    add_shape(slide, 5, x, y, width, height, CARD, color)
+    icon_size = height - Inches(0.08)
+    add_shape(slide, 9, x + Inches(0.05), y + Inches(0.04), icon_size, icon_size, color)
+    add_text(
+        slide,
+        icon,
+        x + Inches(0.05),
+        y + Inches(0.08),
+        icon_size,
+        Inches(0.12),
+        size=5.8,
+        bold=True,
+        color=WHITE,
+    )
+    add_text(
+        slide,
+        label,
+        x + icon_size + Inches(0.1),
+        y + Inches(0.09),
+        width - icon_size - Inches(0.13),
+        Inches(0.12),
+        size=5.9 if len(label) > 8 else 6.5,
+        bold=True,
+        color=LIGHT,
+        align=PP_ALIGN.LEFT,
+    )
+
+
+def add_tool_row(slide, specs, x=Inches(0.45), y=Inches(6.82), width=Inches(1.03), gap=Inches(0.08)):
+    for idx, (label, icon, color) in enumerate(specs):
+        add_tool_badge(slide, x + idx * (width + gap), y, label, icon, color, width=width)
 
 
 def delete_unwanted_slides(prs):
@@ -82,16 +162,58 @@ def edit_cover(slide):
         "3-Minute Embedded Lifecycle Intelligence\n"
         "PRD -> PG3 Firmware -> JTAG Evidence -> QA Ready -> STQC",
     )
+    add_tool_row(
+        slide,
+        [
+            ("Confluence", "C", BLUE),
+            ("PSJIRA", "J", BLUE),
+            ("PG3", "P3", ORANGE),
+            ("JTAG", "JT", CYAN),
+            ("QA", "QA", GREEN),
+            ("STQC", "ST", GOLD),
+        ],
+        x=Inches(0.45),
+        y=Inches(6.25),
+        width=Inches(1.15),
+    )
 
 
 def edit_problem(slide):
     # Problem statement remains the same, only slide number changes.
-    pass
+    add_tool_row(
+        slide,
+        [
+            ("Confluence", "C", BLUE),
+            ("JIRA", "J", BLUE),
+            ("GitHub", "GH", PURPLE),
+            ("JTAG", "JT", CYAN),
+            ("QA", "QA", GREEN),
+        ],
+        x=Inches(0.62),
+        y=Inches(6.82),
+        width=Inches(1.17),
+    )
 
 
 def edit_architecture(slide):
     # Architecture remains the same, only slide number changes.
-    pass
+    add_tool_row(
+        slide,
+        [
+            ("JIRA", "J", BLUE),
+            ("Confluence", "C", BLUE),
+            ("GitHub", "GH", PURPLE),
+            ("Copilot", "AI", GREEN),
+            ("ROVO", "R", ORANGE),
+            ("MCP", "M", CYAN),
+            ("JTAG", "JT", CYAN),
+            ("QA", "QA", GREEN),
+        ],
+        x=Inches(0.46),
+        y=Inches(6.85),
+        width=Inches(1.05),
+        gap=Inches(0.06),
+    )
 
 
 def edit_prd_to_backlog(slide):
@@ -127,6 +249,20 @@ def edit_prd_to_backlog(slide):
         43,
         "Lists stories for the user to pick, then creates a feature branch "
         "with PRD clauses and QA inputs attached.",
+    )
+    add_tool_row(
+        slide,
+        [
+            ("Confluence", "C", BLUE),
+            ("SDE", "SE", TEAL),
+            ("PSJIRA", "PJ", BLUE),
+            ("JIRA", "J", BLUE),
+            ("Git Branch", "GB", PURPLE),
+            ("QA Input", "QA", GREEN),
+        ],
+        x=Inches(0.58),
+        y=Inches(6.83),
+        width=Inches(1.22),
     )
 
 
@@ -176,11 +312,40 @@ def edit_pg3_firmware(slide):
     set_shape_text(slide, 81, "Every generated file links PRD, datasheet, QA and hardware evidence.")
     set_shape_text(slide, 84, "PG3 Ready")
     set_shape_text(slide, 85, "Validated firmware flows into QA release and STQC readiness gates.")
+    add_tool_row(
+        slide,
+        [
+            ("Datasheet", "DS", GOLD),
+            ("PRD", "PR", BLUE),
+            ("SDK", "SK", GREEN),
+            ("OS/RTOS", "OS", TEAL),
+            ("Git Branch", "GB", PURPLE),
+            ("JTAG", "JT", CYAN),
+        ],
+        x=Inches(0.62),
+        y=Inches(6.86),
+        width=Inches(1.18),
+    )
 
 
 def edit_jtag(slide):
     # Keep V9 page 8's workflow and use cases intact. Only slide number changes.
-    pass
+    add_tool_row(
+        slide,
+        [
+            ("JTAG", "JT", CYAN),
+            ("MCU", "MC", ORANGE),
+            ("Fault", "FA", RED),
+            ("Trace", "TR", BLUE),
+            ("Probe", "PB", GREEN),
+            ("GitHub", "GH", PURPLE),
+            ("JIRA", "J", BLUE),
+        ],
+        x=Inches(0.52),
+        y=Inches(6.86),
+        width=Inches(1.05),
+        gap=Inches(0.06),
+    )
 
 
 def edit_stqc(slide):
@@ -213,6 +378,20 @@ def edit_stqc(slide):
     set_shape_text(slide, 27, "STQC SUBMISSION GATE")
     set_shape_text(slide, 34, "Evidence pack ready.\nCleared for auditor review.")
     set_shape_text(slide, 40, "Guideline gaps found.\nCreate Jira stories.")
+    add_tool_row(
+        slide,
+        [
+            ("STQC", "ST", GOLD),
+            ("BIS", "BI", ORANGE),
+            ("Code", "CD", CYAN),
+            ("Rules", "ER", RED),
+            ("Audit Pack", "AP", GREEN),
+            ("JIRA", "J", BLUE),
+        ],
+        x=Inches(0.82),
+        y=Inches(6.83),
+        width=Inches(1.2),
+    )
 
 
 def edit_qa_loop(slide):
@@ -241,6 +420,20 @@ def edit_qa_loop(slide):
         slide,
         26,
         "Automated stories and priorities are created until the release gate returns READY.",
+    )
+    add_tool_row(
+        slide,
+        [
+            ("QA Gate", "QA", GREEN),
+            ("PRD", "PR", BLUE),
+            ("JTAG", "JT", CYAN),
+            ("JIRA", "J", BLUE),
+            ("Confluence", "C", BLUE),
+            ("Release", "RL", ORANGE),
+        ],
+        x=Inches(0.7),
+        y=Inches(6.83),
+        width=Inches(1.16),
     )
 
 
@@ -297,6 +490,19 @@ def edit_results(slide):
         slide,
         49,
         "FOCUS: AEPLO loops across PRD, PG3 firmware, JTAG, QA and STQC until READY.",
+    )
+    add_tool_row(
+        slide,
+        [
+            ("STQC", "ST", GOLD),
+            ("PG3", "P3", ORANGE),
+            ("JTAG", "JT", CYAN),
+            ("QA", "QA", GREEN),
+            ("Tokens", "TK", PURPLE),
+        ],
+        x=Inches(1.05),
+        y=Inches(6.82),
+        width=Inches(1.18),
     )
 
 
