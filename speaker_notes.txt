@@ -7,7 +7,9 @@ Speaker Notes - V7 / Honeywell Theme
 --------------------------------------------------------
 SLIDE 1 - COVER  (~15 sec)
 --------------------------------------------------------
-"Today we are presenting the AEPLO JTAG Accelerator for
+"Today we are presenting the 
+AI Enabled Product Development Life Cycle Orchestrato,
+Code named  "AEPLO " for
 Embedded PDLC AI Optimisation. The story is simple: connect
 planning data, code, AI assistance, and JTAG evidence so we
 can move faster from discovery to validated launch readiness."
@@ -87,7 +89,17 @@ SLIDE 9 - PG5 VALIDATION GATEKEEPER  (~20 sec)
 "At PG5, AEPLO evaluates code, QA results, traceability, and
 JTAG/SWD evidence together. The gatekeeper produces a clear
 READY or NOT_READY verdict, plus a prioritized remediation list
-for validation and launch preparation."
+for validation and launch preparation.“
+We also Plan to demo a STQC Agent as part of PG5 , 
+All IOT based Surveillance devices (Cameras and NVRs) 
+need to be BIS certified and in order to do so , need to go 
+through a very strict STQC audit.
+The STQC team updates the Guidelines from time to time, 
+tightening the security norms a little further at each revision.
+
+Developers take  months to traverse through the code, and Create evidences, 
+Validate them and do a thorough Code/Hardware Review.
+AEPLO’s STQC feature reduces this time frame to Days.
 
 --------------------------------------------------------
 SLIDE 10 - QA2RELEASE INTELLIGENCE  (~20 sec)
