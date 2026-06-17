@@ -13,26 +13,26 @@ readiness for regulated IoT security and surveillance products."
 --------------------------------------------------------
 SLIDE 2 - COMBINED FLOW (~62 sec)
 --------------------------------------------------------
-"This slide combines the rest of the lifecycle story in five cards. First,
-the problem and architecture remain the same: embedded PDLC data is
+embedded PDLC data is
 fragmented across Confluence, Jira, GitHub, QA and hardware evidence, and
-AEPLO brings it into one orchestration layer. Second, the Confluence PRD,
-guided by SDE Elements and PSJIRA, creates epics and stories. Third, the
-user picks a story and creates a feature branch with PRD and QA context.
-Fourth, at PG3, AEPLO generates firmware from the datasheet and PRD,
+AEPLO brings it into one orchestration layer. Then the  Confluence PRD,
+guided by SDE Elements and PSJIRA, creates epics and stories. 
+Next, the  user picks a story and creates a feature branch with PRD and QA context.
+Next , at PG3, AEPLO generates firmware from the datasheet and PRD,
 injecting SDK, BSP and OS or RTOS context, then validates it against the
 datasheet and acceptance criteria. Finally, QA inputs, PRD criteria and
 JTAG evidence produce READY or NOT_READY; NOT_READY becomes the priority
-list for the next release loop."
+list for the next release loop.
 
 --------------------------------------------------------
 SLIDE 3 - JTAG DEBUG COPILOT (~32 sec)
 --------------------------------------------------------
-"This is the JTAG slide from V9 page 8. The agent starts from a bug or
+" The JTAG  agent starts from a bug or
 story ticket, routes context to the JTAG orchestrator, connects to the
-target MCU, and returns Git PR and Jira evidence. It diagnosed a
-bootloader-to-application HardFault in 45 minutes, simulated sub-zero ADC
-behavior at room temperature, and traced a boot failure to execution
+target MCU, and returns Git PR and Jira evidence. 
+In the demo we will  diagnose a
+bootloader-to-application HardFault in 45 minutes, simulate sub-zero ADC
+behavior at room temperature, and trace a boot failure to execution
 redirecting to system ROM instead of internal flash."
 
 --------------------------------------------------------
