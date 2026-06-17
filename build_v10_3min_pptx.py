@@ -113,51 +113,68 @@ def draw_combined_slide(slide):
     rect(slide, 0, 0, Inches(10.0), Inches(7.5), DARK_NAVY)
     rect(slide, 0, 0, Inches(10.0), Inches(0.055), CYAN)
 
-    # V9-style subtle tech grid.
-    grid_color = RGBColor(0x08, 0x22, 0x40)
-    for i in range(18):
-        rect(slide, Inches(0), Inches(0.7 + i * 0.34), Inches(10.0), Inches(0.006), grid_color)
-    for i in range(13):
-        rect(slide, Inches(0.4 + i * 0.75), Inches(0.7), Inches(0.006), Inches(5.85), grid_color)
-
-    roundrect(slide, Inches(0.38), Inches(0.48), Inches(2.35), Inches(0.3), BLUE)
-    txt(slide, "COMBINED FLOW", Inches(0.38), Inches(0.53), Inches(2.35), Inches(0.12), size=8.5, bold=True, align=PP_ALIGN.CENTER)
-    txt(slide, "One Slide Summary: Problem -> Architecture -> PRD -> PG3 -> QA Gate", Inches(0.38), Inches(0.86), Inches(9.0), Inches(0.48), size=23, bold=True)
-    rect(slide, Inches(0.38), Inches(1.42), Inches(9.2), Inches(0.018), CYAN)
+    roundrect(slide, Inches(0.38), Inches(0.48), Inches(2.2), Inches(0.3), TEAL)
+    txt(slide, "LIFECYCLE FLOW", Inches(0.38), Inches(0.53), Inches(2.2), Inches(0.12), size=8.5, bold=True, align=PP_ALIGN.CENTER)
+    txt(slide, "Combined Lifecycle Summary", Inches(0.38), Inches(0.82), Inches(9.0), Inches(0.58), size=28, bold=True)
+    rect(slide, Inches(0.38), Inches(1.45), Inches(9.24), Inches(0.016), TEAL)
     txt(
         slide,
-        "Combines original pages 2, 3, 4, 5 and 7 while preserving the requested V10 pages 1, 6, 8 and 9 unchanged.",
-        Inches(0.38), Inches(1.54), Inches(9.25), Inches(0.36), size=10.5, italic=True, color=LIGHT,
+        "Pages 2, 3, 4, 5 and 7 compressed into one V9-style flow: problem and architecture, PRD-to-work selection, PG3 generation and QA release gating.",
+        Inches(0.38), Inches(1.55), Inches(9.3), Inches(0.45), size=12, italic=True, color=LIGHT,
     )
 
-    cards = [
-        (ORANGE, "1", "Problem", "Fragmented PRD, Jira, Confluence, GitHub, QA and hardware evidence slow PG1-to-PG5 decisions."),
-        (BLUE, "2", "Architecture", "AEPLO connects inputs into a knowledge graph, orchestration core, automation and release-gate outcomes."),
-        (TEAL, "3", "PRD -> Stories", "Confluence PRD guided by SDE Elements and PSJIRA creates epics/stories for users to pick and branch."),
-        (PURPLE, "4", "PG3 Firmware", "Datasheet + PRD + SDK/BSP + OS/RTOS context generate and validate firmware/code."),
-        (GREEN, "5", "QA Closed Loop", "QA inputs, PRD and JTAG evidence produce READY / NOT_READY; gaps become next-release priorities."),
+    steps = [
+        (
+            TEAL,
+            "01",
+            "UNIFY",
+            "Problem + Architecture",
+            "Fragmented PRD, Jira, Confluence, GitHub, QA and hardware evidence are connected into AEPLO's knowledge graph and orchestration core.",
+        ),
+        (
+            BLUE,
+            "02",
+            "PICK",
+            "PRD -> Epics -> Branch",
+            "Confluence PRD guided by SDE Elements and PSJIRA creates epics/stories for users to pick; selected work creates a feature branch.",
+        ),
+        (
+            GREEN,
+            "03",
+            "VALIDATE",
+            "PG3 Firmware -> QA Gate",
+            "Datasheet + PRD + SDK/BSP + OS/RTOS generate firmware; QA inputs, PRD and JTAG evidence produce READY / NOT_READY.",
+        ),
     ]
-    for i, (color, num, title, body) in enumerate(cards):
-        x = Inches(0.42 + i * 1.88)
-        y = Inches(2.25)
-        roundrect(slide, x, y, Inches(1.7), Inches(3.35), CARD)
-        rect(slide, x, y, Inches(1.7), Inches(0.055), color)
-        oval(slide, x + Inches(0.55), y + Inches(0.28), Inches(0.58), Inches(0.58), color)
-        txt(slide, num, x + Inches(0.55), y + Inches(0.42), Inches(0.58), Inches(0.12), size=12, bold=True, align=PP_ALIGN.CENTER)
-        txt(slide, title, x + Inches(0.12), y + Inches(1.04), Inches(1.46), Inches(0.35), size=10.6, bold=True, color=color, align=PP_ALIGN.CENTER)
-        txt(slide, body, x + Inches(0.14), y + Inches(1.55), Inches(1.42), Inches(1.25), size=8.4, color=LIGHT, align=PP_ALIGN.CENTER)
-        if i < len(cards) - 1:
-            rect(slide, x + Inches(1.72), y + Inches(1.66), Inches(0.14), Inches(0.04), CYAN)
+    cy_flow = Inches(3.62)
+    rect(slide, Inches(0.38), cy_flow - Inches(0.015), Inches(9.24), Inches(0.03), RGBColor(0x08, 0x28, 0x48))
 
-    roundrect(slide, Inches(0.72), Inches(6.08), Inches(8.55), Inches(0.5), PANEL)
+    for i, (color, num, verb, subtitle, detail) in enumerate(steps):
+        x = Inches(0.38 + i * 3.12)
+        y = Inches(2.2)
+        card_w = Inches(2.88)
+        card_h = Inches(4.52)
+        roundrect(slide, x, y, card_w, card_h, CARD)
+        rect(slide, x, y, card_w, Inches(0.05), color)
+        oval(slide, x + card_w / 2 - Inches(0.42), cy_flow - Inches(0.42), Inches(0.84), Inches(0.84), color)
+        txt(slide, num, x + card_w / 2 - Inches(0.42), cy_flow - Inches(0.24), Inches(0.84), Inches(0.16), size=14, bold=True, align=PP_ALIGN.CENTER)
+        if i < 2:
+            for j in range(6):
+                rect(slide, x + card_w + Inches(0.04) + j * Inches(0.028), cy_flow - Inches(0.016), Inches(0.02), Inches(0.032), TEAL)
+        txt(slide, verb, x, y + Inches(0.15), card_w, Inches(0.45), size=20, bold=True, color=color, align=PP_ALIGN.CENTER)
+        txt(slide, subtitle, x, y + Inches(0.62), card_w, Inches(0.4), size=12, bold=True, align=PP_ALIGN.CENTER)
+        rect(slide, x + Inches(0.18), y + Inches(1.08), card_w - Inches(0.36), Inches(0.016), color)
+        txt(slide, detail, x + Inches(0.18), y + Inches(1.22), card_w - Inches(0.36), Inches(3.1), size=11.2, color=LIGHT)
+
+    roundrect(slide, Inches(0.35), Inches(7.0), Inches(9.3), Inches(0.34), MID)
+    rect(slide, Inches(0.35), Inches(7.0), Inches(0.05), Inches(0.34), TEAL)
     txt(
         slide,
         "Output: users pick traceable work, create feature branches, validate PG3 firmware with JTAG evidence, and loop through QA until READY.",
-        Inches(0.9), Inches(6.22), Inches(8.2), Inches(0.16), size=9.2, bold=True, color=CYAN, align=PP_ALIGN.CENTER,
+        Inches(0.55), Inches(7.0), Inches(9.0), Inches(0.34), size=10, bold=True, color=TEAL, align=PP_ALIGN.CENTER,
     )
-    rect(slide, 0, Inches(7.08), Inches(10.0), Inches(0.42), MID)
-    txt(slide, "2  /  5", Inches(8.92), Inches(7.18), Inches(0.65), Inches(0.16), size=8.5, color=DIM, align=PP_ALIGN.RIGHT)
-    txt(slide, "HONEYWELL", Inches(8.2), Inches(7.18), Inches(0.9), Inches(0.16), size=8.5, bold=True, color=DIM, align=PP_ALIGN.RIGHT)
+    txt(slide, "2  /  5", Inches(9.05), Inches(7.17), Inches(0.45), Inches(0.16), size=8.5, color=DIM, align=PP_ALIGN.RIGHT)
+    txt(slide, "HONEYWELL", Inches(8.1), Inches(7.17), Inches(0.85), Inches(0.16), size=8.5, bold=True, color=DIM, align=PP_ALIGN.RIGHT)
 
 
 def main():
