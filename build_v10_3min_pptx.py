@@ -37,7 +37,7 @@ RED_SOFT = RGBColor(0xA6, 0x12, 0x18)
 
 W = Inches(10.0)
 H = Inches(7.5)
-TOTAL = 8
+TOTAL = 9
 ASSET_DIR = Path('/workspace/v10_honeywell_assets')
 
 prs = Presentation()
@@ -164,6 +164,23 @@ def create_asset(name, theme):
             x, y = 180 + i * 285, 870
             draw.rounded_rectangle((x, y, x + 200, y + 64), radius=10, fill=(255, 255, 255), outline=(215, 25, 32), width=3)
             draw.text((x + 100, y + 32), text, fill=(215, 25, 32), anchor='mm', font=pil_font(24, True))
+    elif theme == 'jtag':
+        make_gradient(draw, width, height, (28, 28, 28), (8, 8, 8))
+        draw.rectangle((0, 0, 1600, 135), fill=(215, 25, 32))
+        draw_circuit(draw, 40, 160, 1.2, color=(215, 25, 32), muted=(90, 90, 90))
+        draw_chip(draw, 1190, 530, 320, 220, 'JTAG', fill=(20, 20, 20), accent=(215, 25, 32))
+        labels = [
+            (180, 285, 'Bug / Story'),
+            (420, 430, 'JTAG\\nOrchestrator'),
+            (700, 285, 'Target MCU'),
+            (710, 625, 'Evidence'),
+        ]
+        for x, y, text in labels:
+            draw.rounded_rectangle((x, y, x + 190, y + 78), radius=14, fill=(255, 255, 255), outline=(215, 25, 32), width=3)
+            draw.text((x + 95, y + 39), text, fill=(215, 25, 32), anchor='mm', font=pil_font(23, True), align='center')
+        draw.line((370, 324, 420, 469), fill=(215, 25, 32), width=7)
+        draw.line((610, 469, 700, 324), fill=(215, 25, 32), width=7)
+        draw.line((800, 365, 805, 625), fill=(215, 25, 32), width=7)
     elif theme == 'qa':
         make_gradient(draw, width, height, (255, 255, 255), (238, 240, 242))
         center = (800, 560)
@@ -204,7 +221,7 @@ def create_asset(name, theme):
 
 
 ASSETS = {name: create_asset(name, name) for name in [
-    'cover', 'problem', 'architecture', 'prd', 'firmware', 'qa', 'stqc', 'results'
+    'cover', 'problem', 'architecture', 'prd', 'firmware', 'jtag', 'qa', 'stqc', 'results'
 ]}
 
 
@@ -458,6 +475,61 @@ def slide_05_pg3_firmware():
     bottom_strip(sl, 5)
 
 
+def slide_06_jtag_debug_copilot():
+    sl = prs.slides.add_slide(BLANK)
+    bg(sl, 'jtag', overlay=0)
+    rect(sl, 0, 0, W, H, BLACK, transparency=22)
+    honeywell_header(sl, 'JTAG Debug Copilot')
+    title(sl, 'Agent JTAG Debugging: From Failure to Fix', color=WHITE)
+    txt(sl,
+        'V9 page 8 inserted into the 3-minute flow: the JTAG agent turns live hardware state into root cause, controlled fixes, Jira evidence and release-gate proof.',
+        Inches(0.35), Inches(1.62), Inches(9.2), Inches(0.42), size=11.2, italic=True, color=WHITE)
+
+    workflow_path = ASSET_DIR / 'jtag_v9_workflow.png'
+    if workflow_path.exists():
+        roundrect(sl, Inches(0.35), Inches(2.18), Inches(2.85), Inches(2.85), WHITE, HON_LINE)
+        sl.shapes.add_picture(str(workflow_path), Inches(0.48), Inches(2.31), width=Inches(2.58), height=Inches(2.58))
+    else:
+        card(sl, Inches(0.35), Inches(2.18), Inches(2.85), Inches(2.85), HON_RED,
+             'JTAG - Agent Workflow',
+             'Bug/Story Ticket -> JTAG Orchestrator -> Target MCU -> Git Provider -> Jira Evidence',
+             body_size=10.0)
+
+    roundrect(sl, Inches(0.35), Inches(5.22), Inches(2.85), Inches(0.92), HON_DARK)
+    txt(sl, 'JTAG - Agent Workflow', Inches(0.5), Inches(5.38), Inches(2.55), Inches(0.16),
+        size=9.0, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+    txt(sl, 'Bug/Story -> Orchestrator -> MCU -> Git PR + Jira RCA', Inches(0.5), Inches(5.68),
+        Inches(2.55), Inches(0.16), size=7.6, color=WHITE, align=PP_ALIGN.CENTER)
+
+    use_cases = [
+        (HON_RED, 'Bootloader -> Application Handoff Failure',
+         'SysTick enabled in bootloader, but application vector table had no SysTick handler. Agent correlated PC, vector tables and peripheral state.',
+         '45 min RCA vs 2-3 days manual'),
+        (BLUE, 'Sub-zero ADC Emulation at Room Temp',
+         'ADC stalled at negative temperature. Agent simulated cold ADC state at 25C to validate driver reinit and gain adjustment.',
+         'Saved 1 week thermal cycling'),
+        (GREEN, 'Boot Failure from Incorrect Configuration',
+         'After flashing a new build, all checks looked normal. Agent traced Program Counter and found execution redirected to system ROM instead of flash.',
+         'Hardware-backed evidence for fix'),
+    ]
+    for i, (clr, head, body, result) in enumerate(use_cases):
+        y = Inches(2.18 + i * 1.44)
+        roundrect(sl, Inches(3.42), y, Inches(6.23), Inches(1.18), WHITE, HON_LINE)
+        rect(sl, Inches(3.42), y, Inches(0.08), Inches(1.18), clr)
+        txt(sl, head, Inches(3.62), y + Inches(0.1), Inches(3.65), Inches(0.24),
+            size=10.8, bold=True, color=clr)
+        txt(sl, body, Inches(3.62), y + Inches(0.42), Inches(4.65), Inches(0.42),
+            size=8.4, color=TEXT)
+        roundrect(sl, Inches(8.26), y + Inches(0.26), Inches(1.18), Inches(0.48), clr)
+        txt(sl, result, Inches(8.34), y + Inches(0.35), Inches(1.02), Inches(0.14),
+            size=7.5, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+
+    roundrect(sl, Inches(3.42), Inches(6.55), Inches(6.23), Inches(0.35), HON_RED)
+    txt(sl, 'A2A physical interface to hardware: Fault Analyzer | Variable Tracer | Peripheral Inspector | Probing Agent | Controlled Auto Fix',
+        Inches(3.58), Inches(6.64), Inches(5.9), Inches(0.12), size=7.8, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+    bottom_strip(sl, 6)
+
+
 def slide_06_qa_gate_loop():
     sl = prs.slides.add_slide(BLANK)
     bg(sl, 'qa', overlay=17)
@@ -494,7 +566,7 @@ def slide_06_qa_gate_loop():
     roundrect(sl, Inches(3.45), Inches(4.05), Inches(3.1), Inches(0.62), HON_DARK)
     txt(sl, 'QA gate guides the next-release backlog until READY is achieved.',
         Inches(3.62), Inches(4.22), Inches(2.76), Inches(0.14), size=8.8, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-    bottom_strip(sl, 6)
+    bottom_strip(sl, 7)
 
 
 def slide_07_stqc_agent():
@@ -516,7 +588,7 @@ def slide_07_stqc_agent():
     roundrect(sl, Inches(1.15), Inches(6.56), Inches(7.7), Inches(0.38), HON_RED)
     txt(sl, 'Output: READY for STQC submission, or NOT_READY with actionable evidence gaps and Jira remediation.',
         Inches(1.32), Inches(6.66), Inches(7.35), Inches(0.14), size=8.7, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-    bottom_strip(sl, 7)
+    bottom_strip(sl, 8)
 
 
 def slide_08_results():
@@ -549,7 +621,7 @@ def slide_08_results():
         Inches(2.55), Inches(5.36), Inches(6.85), Inches(0.6), size=9.6, color=TEXT)
     txt(sl, 'Close: AEPLO keeps looping across PG3, JTAG, QA and STQC until the release is READY.',
         Inches(0.55), Inches(6.72), Inches(8.95), Inches(0.16), size=9.8, bold=True, color=HON_RED, align=PP_ALIGN.CENTER)
-    bottom_strip(sl, 8)
+    bottom_strip(sl, 9)
 
 
 slide_01_cover()
@@ -557,6 +629,7 @@ slide_02_problem()
 slide_03_architecture()
 slide_04_prd_to_backlog()
 slide_05_pg3_firmware()
+slide_06_jtag_debug_copilot()
 slide_06_qa_gate_loop()
 slide_07_stqc_agent()
 slide_08_results()
