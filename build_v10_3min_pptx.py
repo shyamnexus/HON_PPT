@@ -34,6 +34,13 @@ def delete_unwanted_slides(prs):
         del prs.slides._sldIdLst[idx]
 
 
+def move_slide(prs, old_idx, new_idx):
+    """Move a slide within the deck by manipulating the slide id list."""
+    slide_id = prs.slides._sldIdLst[old_idx]
+    prs.slides._sldIdLst.remove(slide_id)
+    prs.slides._sldIdLst.insert(new_idx, slide_id)
+
+
 def set_text(shape, text):
     """Set text while keeping the shape and most inherited formatting intact."""
     if not hasattr(shape, "text_frame"):
@@ -250,8 +257,8 @@ def edit_results(slide):
     set_shape_text(
         slide,
         19,
-        "- Submission evidence pack: 6-10 weeks -> 2-4 days\n"
-        "- First-pack effort reduction: 85-92%\n"
+        "- Submission evidence pack: 8-12 weeks -> 1-3 days\n"
+        "- First-pack effort reduction: 90-95%\n"
         "- Hard-rule checks: foreign characters, STQC ER coverage, missing sections",
     )
     set_shape_text(slide, 25, "PG3 Firmware")
@@ -296,6 +303,9 @@ def edit_results(slide):
 def main():
     prs = Presentation(SOURCE)
     delete_unwanted_slides(prs)
+    # V9 source order has PG5 validation before QA2Release; V10 story needs
+    # QA Release Gate before the PG5 STQC focus.
+    move_slide(prs, 7, 6)
 
     edit_cover(prs.slides[0])
     edit_problem(prs.slides[1])
@@ -303,8 +313,8 @@ def main():
     edit_prd_to_backlog(prs.slides[3])
     edit_pg3_firmware(prs.slides[4])
     edit_jtag(prs.slides[5])
-    edit_stqc(prs.slides[6])
-    edit_qa_loop(prs.slides[7])
+    edit_qa_loop(prs.slides[6])
+    edit_stqc(prs.slides[7])
     edit_results(prs.slides[8])
     update_slide_numbers(prs)
 

@@ -76,7 +76,7 @@ Jira tickets or stories for remediation."
 SLIDE 9 - RESULTS AND CLOSE (~15 sec)
 --------------------------------------------------------
 "The realistic impact is material: STQC evidence preparation drops from
-weeks to days, PG3 firmware loops are 45 to 60 percent faster, JTAG root
+8 to 12 weeks into 1 to 3 days, PG3 firmware loops are 45 to 60 percent faster, JTAG root
 cause is reduced to under two hours, and routed context plus prompt caching
 cuts token use by about 35 to 45 percent. AEPLO keeps looping until QA says
 READY."
