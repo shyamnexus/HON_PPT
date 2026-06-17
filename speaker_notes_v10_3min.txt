@@ -13,16 +13,17 @@ readiness for regulated IoT security and surveillance products."
 --------------------------------------------------------
 SLIDE 2 - COMBINED FLOW (~62 sec)
 --------------------------------------------------------
-"This slide combines the rest of the lifecycle story. The problem and
-architecture remain the same: embedded PDLC data is fragmented across
-Confluence, Jira, GitHub, QA and hardware evidence, and AEPLO brings it into
-one orchestration layer. From the Confluence PRD, guided by SDE Elements and
-PSJIRA, epics and stories are created and listed for the user to pick. The
-selected work creates a feature branch with PRD and QA context. At PG3, AEPLO
-generates firmware from the datasheet and PRD, injecting SDK, BSP and OS or
-RTOS context, then validates it against datasheet and acceptance criteria.
-Finally, QA inputs, PRD criteria and JTAG evidence produce READY or NOT_READY;
-NOT_READY becomes the priority list for the next release loop."
+"This slide combines the rest of the lifecycle story in five cards. First,
+the problem and architecture remain the same: embedded PDLC data is
+fragmented across Confluence, Jira, GitHub, QA and hardware evidence, and
+AEPLO brings it into one orchestration layer. Second, the Confluence PRD,
+guided by SDE Elements and PSJIRA, creates epics and stories. Third, the
+user picks a story and creates a feature branch with PRD and QA context.
+Fourth, at PG3, AEPLO generates firmware from the datasheet and PRD,
+injecting SDK, BSP and OS or RTOS context, then validates it against the
+datasheet and acceptance criteria. Finally, QA inputs, PRD criteria and
+JTAG evidence produce READY or NOT_READY; NOT_READY becomes the priority
+list for the next release loop."
 
 --------------------------------------------------------
 SLIDE 3 - JTAG DEBUG COPILOT (~32 sec)
