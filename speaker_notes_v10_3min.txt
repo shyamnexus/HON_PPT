@@ -1,9 +1,9 @@
 AI-DRIVEN EMBEDDED PRODUCT LIFECYCLE ORCHESTRATOR V10
 3-minute speaker notes
-Target duration: 180 seconds | 9 slides
+Target duration: 180 seconds | 5 slides
 
 --------------------------------------------------------
-SLIDE 1 - COVER (~10 sec)
+SLIDE 1 - COVER (~18 sec)
 --------------------------------------------------------
 "Today we are showing AEPLO, the AI-driven embedded product lifecycle
 orchestrator. The 3-minute story is PRD to firmware, firmware to JTAG
@@ -11,39 +11,22 @@ evidence, evidence to QA release readiness, and finally STQC submission
 readiness for regulated IoT security and surveillance products."
 
 --------------------------------------------------------
-SLIDE 2 - THE PROBLEM (~18 sec)
+SLIDE 2 - COMBINED FLOW (~62 sec)
 --------------------------------------------------------
-"The problem statement remains the same: embedded PDLC data is fragmented.
-Requirements, Jira tickets, Confluence knowledge, GitHub code, JTAG/SWD
-hardware evidence and QA results live in different places. That slows PG1
-to PG5 decisions and makes release readiness hard to prove."
+"This slide combines the rest of the lifecycle story in five cards. First,
+the problem and architecture remain the same: embedded PDLC data is
+fragmented across Confluence, Jira, GitHub, QA and hardware evidence, and
+AEPLO brings it into one orchestration layer. Second, the Confluence PRD,
+guided by SDE Elements and PSJIRA, creates epics and stories. Third, the
+user picks a story and creates a feature branch with PRD and QA context.
+Fourth, at PG3, AEPLO generates firmware from the datasheet and PRD,
+injecting SDK, BSP and OS or RTOS context, then validates it against the
+datasheet and acceptance criteria. Finally, QA inputs, PRD criteria and
+JTAG evidence produce READY or NOT_READY; NOT_READY becomes the priority
+list for the next release loop."
 
 --------------------------------------------------------
-SLIDE 3 - ARCHITECTURE (~19 sec)
---------------------------------------------------------
-"The architecture also remains the same. AEPLO connects Jira, Confluence,
-GitHub, Copilot, ROVO Studio, Atlassian MCP, JTAG/SWD and QA results into
-one orchestration layer. The output is controlled automation, release gate
-decisions and reusable audit evidence."
-
---------------------------------------------------------
-SLIDE 4 - PRD TO BACKLOG (~21 sec)
---------------------------------------------------------
-"The flow starts with the PRD hosted on Confluence. Guided by SDE Elements
-and PSJIRA, AEPLO creates epics, stories, acceptance criteria and trace
-links. The user sees the list, picks what to work on, and AEPLO creates a
-feature branch with the relevant PRD and QA context attached."
-
---------------------------------------------------------
-SLIDE 5 - PG3 FIRMWARE GENERATION (~22 sec)
---------------------------------------------------------
-"At PG3, AEPLO provides tools for firmware and code generation. It uses the
-datasheet and PRD, then injects SDK, BSP, compiler, OS or RTOS context and
-board constraints. Generated firmware is validated against the datasheet,
-PRD and test context before hardware validation."
-
---------------------------------------------------------
-SLIDE 6 - JTAG DEBUG COPILOT (~24 sec)
+SLIDE 3 - JTAG DEBUG COPILOT (~32 sec)
 --------------------------------------------------------
 "This is the JTAG slide from V9 page 8. The agent starts from a bug or
 story ticket, routes context to the JTAG orchestrator, connects to the
@@ -53,15 +36,7 @@ behavior at room temperature, and traced a boot failure to execution
 redirecting to system ROM instead of internal flash."
 
 --------------------------------------------------------
-SLIDE 7 - QA RELEASE GATE LOOP (~19 sec)
---------------------------------------------------------
-"The QA release gate closes the loop. A feature branch, QA inputs, PRD
-criteria and JTAG evidence are evaluated together. If the result is READY,
-the release candidate moves forward. If it is NOT_READY, AEPLO creates
-prioritized Jira stories and defects for the next release cycle."
-
---------------------------------------------------------
-SLIDE 8 - PG5 STQC AGENT (~32 sec)
+SLIDE 4 - PG5 STQC AGENT (~43 sec)
 --------------------------------------------------------
 "The star of the show is the PG5 STQC agent. IoT security and surveillance
 devices need BIS certification governed by STQC guidelines, for both
@@ -73,7 +48,7 @@ submission pack is ready. If not, it highlights the section and creates
 Jira tickets or stories for remediation."
 
 --------------------------------------------------------
-SLIDE 9 - RESULTS AND CLOSE (~15 sec)
+SLIDE 5 - RESULTS AND CLOSE (~25 sec)
 --------------------------------------------------------
 "The realistic impact is material: STQC evidence preparation drops from
 8 to 12 weeks into 1 to 3 days, PG3 firmware loops are 45 to 60 percent faster, JTAG root
