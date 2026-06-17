@@ -18,19 +18,25 @@ from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
 
-# Honeywell-oriented palette
+# V9-oriented dark tech palette
+NAVY = RGBColor(0x05, 0x14, 0x2E)
+DARK_NAVY = RGBColor(0x02, 0x0A, 0x1A)
+MID = RGBColor(0x0E, 0x2A, 0x4A)
+PANEL = RGBColor(0x0B, 0x1F, 0x3A)
+CARD_BG = RGBColor(0x0F, 0x28, 0x45)
 HON_RED = RGBColor(0xD7, 0x19, 0x20)
 HON_DARK = RGBColor(0x1F, 0x1F, 0x1F)
 HON_CHARCOAL = RGBColor(0x2D, 0x2D, 0x2D)
 HON_GRAY = RGBColor(0xF3, 0xF4, 0xF6)
-HON_LINE = RGBColor(0xD9, 0xDD, 0xE3)
+HON_LINE = RGBColor(0x24, 0x4A, 0x70)
 WHITE = RGBColor(0xFF, 0xFF, 0xFF)
 BLACK = RGBColor(0x00, 0x00, 0x00)
-TEXT = RGBColor(0x24, 0x24, 0x24)
-MUTED = RGBColor(0x68, 0x68, 0x68)
+TEXT = RGBColor(0xE8, 0xF0, 0xFC)
+MUTED = RGBColor(0xB8, 0xD0, 0xEC)
 GREEN = RGBColor(0x00, 0x8A, 0x4B)
 ORANGE = RGBColor(0xE8, 0x79, 0x00)
 BLUE = RGBColor(0x00, 0x66, 0xA4)
+CYAN = RGBColor(0x00, 0xC8, 0xF0)
 PURPLE = RGBColor(0x65, 0x42, 0xA6)
 GOLD = RGBColor(0xB8, 0x83, 0x00)
 RED_SOFT = RGBColor(0xA6, 0x12, 0x18)
@@ -122,11 +128,11 @@ def create_asset(name, theme):
     draw = ImageDraw.Draw(img)
 
     if theme == 'cover':
-        make_gradient(draw, width, height, (30, 30, 30), (8, 8, 8))
-        draw.polygon([(1020, 0), (1600, 0), (1600, 1200), (1160, 1200)], fill=(215, 25, 32))
-        draw.polygon([(1160, 0), (1600, 0), (1600, 1200), (1340, 1200)], fill=(166, 18, 24))
-        draw_circuit(draw, 600, 80, 0.82, color=(255, 255, 255), muted=(125, 125, 125))
-        draw_chip(draw, 1230, 620, 310, 210, 'AEPLO', fill=(34, 34, 34), accent=(255, 255, 255))
+        make_gradient(draw, width, height, (2, 10, 26), (5, 20, 46))
+        draw.polygon([(940, 0), (1600, 0), (1600, 1200), (1240, 1200)], fill=(5, 32, 62))
+        draw.polygon([(1180, 0), (1600, 0), (1600, 1200), (1420, 1200)], fill=(0, 70, 112))
+        draw_circuit(draw, 560, 80, 0.9, color=(0, 200, 240), muted=(60, 110, 150))
+        draw_chip(draw, 1230, 620, 310, 210, 'AEPLO', fill=(8, 26, 48), accent=(0, 200, 240))
     elif theme == 'problem':
         make_gradient(draw, width, height, (255, 255, 255), (235, 237, 240))
         draw.rectangle((0, 0, 1600, 135), fill=(215, 25, 32))
@@ -165,10 +171,10 @@ def create_asset(name, theme):
             draw.rounded_rectangle((x, y, x + 200, y + 64), radius=10, fill=(255, 255, 255), outline=(215, 25, 32), width=3)
             draw.text((x + 100, y + 32), text, fill=(215, 25, 32), anchor='mm', font=pil_font(24, True))
     elif theme == 'jtag':
-        make_gradient(draw, width, height, (28, 28, 28), (8, 8, 8))
-        draw.rectangle((0, 0, 1600, 135), fill=(215, 25, 32))
-        draw_circuit(draw, 40, 160, 1.2, color=(215, 25, 32), muted=(90, 90, 90))
-        draw_chip(draw, 1190, 530, 320, 220, 'JTAG', fill=(20, 20, 20), accent=(215, 25, 32))
+        make_gradient(draw, width, height, (2, 10, 26), (5, 20, 46))
+        draw.rectangle((0, 0, 1600, 135), fill=(0, 95, 150))
+        draw_circuit(draw, 40, 160, 1.2, color=(0, 200, 240), muted=(60, 110, 150))
+        draw_chip(draw, 1190, 530, 320, 220, 'JTAG', fill=(8, 26, 48), accent=(0, 200, 240))
         labels = [
             (180, 285, 'Bug / Story'),
             (420, 430, 'JTAG\\nOrchestrator'),
@@ -287,49 +293,49 @@ def txt(slide, text, l, t, w, h, size=14, bold=False, italic=False,
 def bg(slide, asset_name, overlay=18):
     slide.shapes.add_picture(str(ASSETS[asset_name]), 0, 0, width=W, height=H)
     if overlay:
-        rect(slide, 0, 0, W, H, WHITE, transparency=overlay)
+        rect(slide, 0, 0, W, H, DARK_NAVY, transparency=overlay)
 
 
 def honeywell_header(slide, label, red=True):
-    rect(slide, 0, 0, W, Inches(0.56), WHITE)
-    rect(slide, 0, Inches(0.56), W, Inches(0.05), HON_RED)
-    txt(slide, 'HONEYWELL', Inches(0.35), Inches(0.13), Inches(1.9), Inches(0.28),
-        size=14, bold=True, color=HON_RED)
-    txt(slide, label.upper(), Inches(7.0), Inches(0.16), Inches(2.65), Inches(0.24),
-        size=8.5, bold=True, color=MUTED, align=PP_ALIGN.RIGHT)
+    rect(slide, 0, 0, W, Inches(0.06), CYAN)
+    roundrect(slide, Inches(0.35), Inches(0.45), Inches(2.35), Inches(0.3), BLUE)
+    txt(slide, label.upper(), Inches(0.35), Inches(0.5), Inches(2.35), Inches(0.12),
+        size=8.0, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
+    txt(slide, 'HONEYWELL', Inches(8.2), Inches(0.45), Inches(1.45), Inches(0.22),
+        size=10.5, bold=True, color=HON_RED, align=PP_ALIGN.RIGHT)
 
 
 def bottom_strip(slide, n):
-    rect(slide, 0, H - Inches(0.36), W, Inches(0.36), HON_DARK)
+    rect(slide, 0, H - Inches(0.36), W, Inches(0.36), MID)
     txt(slide, 'AI-Driven Embedded Product Lifecycle Orchestrator', Inches(0.35), H - Inches(0.27),
-        Inches(5.5), Inches(0.18), size=8.5, color=WHITE)
+        Inches(5.5), Inches(0.18), size=8.5, color=MUTED)
     txt(slide, f'{n} / {TOTAL}', W - Inches(0.82), H - Inches(0.28),
-        Inches(0.52), Inches(0.18), size=8.5, color=WHITE, align=PP_ALIGN.RIGHT)
+        Inches(0.52), Inches(0.18), size=8.5, color=MUTED, align=PP_ALIGN.RIGHT)
 
 
-def title(slide, text, color=TEXT):
+def title(slide, text, color=WHITE):
     txt(slide, text, Inches(0.35), Inches(0.82), Inches(8.95), Inches(0.54),
         size=25, bold=True, color=color)
-    rect(slide, Inches(0.35), Inches(1.42), Inches(1.35), Inches(0.06), HON_RED)
+    rect(slide, Inches(0.35), Inches(1.42), Inches(1.35), Inches(0.06), CYAN)
 
 
 def card(slide, x, y, w, h, accent, heading, body, heading_size=12.5, body_size=10.0):
-    roundrect(slide, x + Inches(0.04), y + Inches(0.05), w, h, RGBColor(0xC8, 0xCC, 0xD2), transparency=20)
-    roundrect(slide, x, y, w, h, WHITE, HON_LINE)
+    roundrect(slide, x + Inches(0.04), y + Inches(0.05), w, h, DARK_NAVY, transparency=30)
+    roundrect(slide, x, y, w, h, CARD_BG, HON_LINE)
     rect(slide, x, y, Inches(0.08), h, accent)
     txt(slide, heading, x + Inches(0.18), y + Inches(0.13), w - Inches(0.3), Inches(0.42),
         size=heading_size, bold=True, color=accent)
     txt(slide, body, x + Inches(0.18), y + Inches(0.62), w - Inches(0.3), h - Inches(0.76),
-        size=body_size, color=TEXT)
+        size=body_size, color=MUTED)
 
 
 def metric_card(slide, x, y, w, h, accent, title_text, value, note):
-    roundrect(slide, x, y, w, h, WHITE, HON_LINE)
+    roundrect(slide, x, y, w, h, CARD_BG, HON_LINE)
     rect(slide, x, y, Inches(0.08), h, accent)
     txt(slide, title_text, x + Inches(0.18), y + Inches(0.12), Inches(1.9), Inches(0.28),
         size=11.2, bold=True, color=accent)
     txt(slide, value, x + Inches(2.05), y + Inches(0.08), w - Inches(2.25), Inches(0.33),
-        size=12.2, bold=True, color=TEXT, align=PP_ALIGN.RIGHT)
+        size=12.2, bold=True, color=WHITE, align=PP_ALIGN.RIGHT)
     txt(slide, note, x + Inches(0.18), y + Inches(0.52), w - Inches(0.36), Inches(0.38),
         size=9.2, color=MUTED)
 
@@ -337,8 +343,8 @@ def metric_card(slide, x, y, w, h, accent, title_text, value, note):
 def slide_01_cover():
     sl = prs.slides.add_slide(BLANK)
     bg(sl, 'cover', overlay=0)
-    rect(sl, 0, 0, Inches(6.15), H, HON_DARK, transparency=4)
-    rect(sl, 0, 0, Inches(0.12), H, HON_RED)
+    rect(sl, 0, 0, Inches(6.15), H, DARK_NAVY, transparency=6)
+    rect(sl, 0, 0, Inches(0.12), H, CYAN)
     txt(sl, 'HONEYWELL', Inches(0.35), Inches(0.4), Inches(2.2), Inches(0.35),
         size=18, bold=True, color=HON_RED)
     txt(sl, 'AI-DRIVEN EMBEDDED', Inches(0.35), Inches(1.35), Inches(5.9), Inches(0.62),
@@ -346,8 +352,8 @@ def slide_01_cover():
     txt(sl, 'PRODUCT LIFECYCLE', Inches(0.35), Inches(2.02), Inches(5.9), Inches(0.62),
         size=31, bold=True, color=WHITE)
     txt(sl, 'ORCHESTRATOR', Inches(0.35), Inches(2.69), Inches(5.9), Inches(0.62),
-        size=31, bold=True, color=HON_RED)
-    roundrect(sl, Inches(0.35), Inches(3.55), Inches(1.25), Inches(0.34), HON_RED)
+        size=31, bold=True, color=CYAN)
+    roundrect(sl, Inches(0.35), Inches(3.55), Inches(1.25), Inches(0.34), BLUE)
     txt(sl, 'VERSION 10', Inches(0.35), Inches(3.59), Inches(1.25), Inches(0.22),
         size=10.5, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
     txt(sl, '3-minute executive story: PRD -> firmware -> JTAG evidence -> QA READY -> STQC submission',
@@ -378,7 +384,7 @@ def slide_02_problem():
         col, row = i % 3, i // 3
         x = Inches(0.35 + col * 3.15)
         y = Inches(2.38 + row * 2.03)
-        roundrect(sl, x, y, Inches(2.95), Inches(1.75), WHITE, HON_LINE)
+        roundrect(sl, x, y, Inches(2.95), Inches(1.75), CARD_BG, HON_LINE)
         rect(sl, x, y, Inches(2.95), Inches(0.07), clr)
         roundrect(sl, x + Inches(0.17), y + Inches(0.22), Inches(0.62), Inches(0.44), clr)
         txt(sl, icon, x + Inches(0.17), y + Inches(0.27), Inches(0.62), Inches(0.18),
@@ -411,7 +417,7 @@ def slide_03_architecture():
         roundrect(sl, Inches(0.55), y, Inches(2.1), Inches(0.66), clr)
         txt(sl, label, Inches(0.58), y + Inches(0.18), Inches(2.04), Inches(0.18),
             size=8.2, bold=True, color=WHITE, align=PP_ALIGN.CENTER)
-        roundrect(sl, Inches(2.85), y, Inches(6.7), Inches(0.66), WHITE, HON_LINE)
+        roundrect(sl, Inches(2.85), y, Inches(6.7), Inches(0.66), CARD_BG, HON_LINE)
         rect(sl, Inches(2.85), y, Inches(0.06), Inches(0.66), clr)
         txt(sl, detail, Inches(3.05), y + Inches(0.19), Inches(6.3), Inches(0.2),
             size=10.2, color=TEXT)
@@ -436,7 +442,7 @@ def slide_04_prd_to_backlog():
     for i, (clr, num, head, body) in enumerate(steps):
         x = Inches(0.35 + i * 2.38)
         y = Inches(3.05)
-        roundrect(sl, x, y, Inches(2.15), Inches(2.72), WHITE, HON_LINE)
+        roundrect(sl, x, y, Inches(2.15), Inches(2.72), CARD_BG, HON_LINE)
         rect(sl, x, y, Inches(2.15), Inches(0.07), clr)
         oval(sl, x + Inches(0.75), y + Inches(0.32), Inches(0.62), Inches(0.62), clr)
         txt(sl, num, x + Inches(0.75), y + Inches(0.51), Inches(0.62), Inches(0.16),
@@ -487,7 +493,7 @@ def slide_06_jtag_debug_copilot():
 
     workflow_path = ASSET_DIR / 'jtag_v9_workflow.png'
     if workflow_path.exists():
-        roundrect(sl, Inches(0.35), Inches(2.18), Inches(2.85), Inches(2.85), WHITE, HON_LINE)
+        roundrect(sl, Inches(0.35), Inches(2.18), Inches(2.85), Inches(2.85), PANEL, HON_LINE)
         sl.shapes.add_picture(str(workflow_path), Inches(0.48), Inches(2.31), width=Inches(2.58), height=Inches(2.58))
     else:
         card(sl, Inches(0.35), Inches(2.18), Inches(2.85), Inches(2.85), HON_RED,
@@ -514,7 +520,7 @@ def slide_06_jtag_debug_copilot():
     ]
     for i, (clr, head, body, result) in enumerate(use_cases):
         y = Inches(2.18 + i * 1.44)
-        roundrect(sl, Inches(3.42), y, Inches(6.23), Inches(1.18), WHITE, HON_LINE)
+        roundrect(sl, Inches(3.42), y, Inches(6.23), Inches(1.18), CARD_BG, HON_LINE)
         rect(sl, Inches(3.42), y, Inches(0.08), Inches(1.18), clr)
         txt(sl, head, Inches(3.62), y + Inches(0.1), Inches(3.65), Inches(0.24),
             size=10.8, bold=True, color=clr)
@@ -554,7 +560,7 @@ def slide_06_qa_gate_loop():
         (Inches(1.85), Inches(5.05)),
     ]
     for (clr, num, head, body), (x, y) in zip(loop, positions):
-        roundrect(sl, x, y, Inches(2.5), Inches(1.22), WHITE, HON_LINE)
+        roundrect(sl, x, y, Inches(2.5), Inches(1.22), CARD_BG, HON_LINE)
         rect(sl, x, y, Inches(0.07), Inches(1.22), clr)
         oval(sl, x + Inches(0.2), y + Inches(0.32), Inches(0.46), Inches(0.46), clr)
         txt(sl, num, x + Inches(0.2), y + Inches(0.46), Inches(0.46), Inches(0.14),
@@ -612,7 +618,7 @@ def slide_08_results():
         y = Inches(2.25 + row * 1.45)
         metric_card(sl, x, y, Inches(4.6), Inches(1.12), clr, head, value, note)
 
-    roundrect(sl, Inches(0.35), Inches(5.25), Inches(9.3), Inches(1.15), WHITE, HON_LINE)
+    roundrect(sl, Inches(0.35), Inches(5.25), Inches(9.3), Inches(1.15), CARD_BG, HON_LINE)
     rect(sl, Inches(0.35), Inches(5.25), Inches(0.08), Inches(1.15), HON_RED)
     txt(sl, 'Token Optimization', Inches(0.55), Inches(5.4), Inches(2.1), Inches(0.24),
         size=12.4, bold=True, color=HON_RED)
